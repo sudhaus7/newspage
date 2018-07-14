@@ -1,0 +1,2 @@
+# cat=basic//01; type=boolean; label=Newspage Type Aktiv
+newspagetype = 0

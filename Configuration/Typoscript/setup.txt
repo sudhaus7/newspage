@@ -1,0 +1,76 @@
+tt_content.list.20.sudhaus7newspage_plugin = USER_INT
+
+plugin.tx_sudhaus7newspage {
+
+	view {
+		templateRootPaths {
+			10 = {$plugin.tx_sudhaus7newspage.view.templateRootPath}
+		}
+		partialRootPaths {
+			10 = {$plugin.tx_sudhaus7newspage.view.partialRootPath}
+		}
+		layoutRootPaths {
+			10 = {$plugin.tx_sudhaus7newspage.view.layoutRootPath}
+		}
+	}
+	settings {
+		#feGroupStoragePid = {$plugin.tx_sudhaus7newspage.feusergroupStorage}
+		#contentFolderStoragePid = {$plugin.tx_sudhaus7newspage.contentFolderStoragePid}
+		replaceemptyshorts = 0
+	}
+	persistence {
+		storagePid = 1
+		recursive = 0
+		classes {
+			SUDHAUS7\Sudhaus7Newspage\Domain\Model\Tag.newRecordStoragePid =
+			SUDHAUS7\Sudhaus7Newspage\Domain\Model\TtContent.newRecordStoragePid =
+
+			SUDHAUS7\Sudhaus7Newspage\Domain\Model\TtContent {
+				mapping {
+					tableName = tt_content
+					columns {
+						sorting.mapOnProperty = sorting
+						tx_sudhaus7newspage_from.mapOnProperty = txSudhaus7newspageFrom
+						tx_sudhaus7newspage_to.mapOnProperty = txSudhaus7newspageTo
+						tx_sudhaus7newspage_type.mapOnProperty = txSudhaus7newspageType
+						tx_sudhaus7newspage_showdate.mapOnProperty = txSudhaus7newspageShowdate
+						tx_sudhaus7newspage_showtime.mapOnProperty = txSudhaus7newspageShowtime
+						tx_sudhaus7newspage_highlight.mapOnProperty = txSudhaus7newspageHighlight
+						tx_sudhaus7newspage_place.mapOnProperty = txSudhaus7newspagePlace
+						tx_sudhaus7newspage_who.mapOnProperty = txSudhaus7newspageWho
+
+						tx_sudhaus7newspage_tag.mapOnProperty = txSudhaus7newspageTag
+						tx_sudhaus7newspage_tag.config {
+							MM = tx_sudhaus7newspage_domain_tag_mm
+							foreign_table = tx_sudhaus7newspage_domain_model_tag
+						}
+					}
+				}
+			}
+		}
+	}
+}
+config.tx_extbase.persistence.classes {
+	SUDHAUS7\Sudhaus7Newspage\Domain\Model\TtContent {
+		mapping {
+			tableName = tt_content
+			columns {
+				sorting.mapOnProperty = sorting
+				tx_sudhaus7newspage_from.mapOnProperty = txSudhaus7newspageFrom
+				tx_sudhaus7newspage_to.mapOnProperty = txSudhaus7newspageTo
+				tx_sudhaus7newspage_type.mapOnProperty = txSudhaus7newspageType
+				tx_sudhaus7newspage_showdate.mapOnProperty = txSudhaus7newspageShowdate
+				tx_sudhaus7newspage_showtime.mapOnProperty = txSudhaus7newspageShowtime
+				tx_sudhaus7newspage_highlight.mapOnProperty = txSudhaus7newspageHighlight
+				tx_sudhaus7newspage_place.mapOnProperty = txSudhaus7newspagePlace
+				tx_sudhaus7newspage_who.mapOnProperty = txSudhaus7newspageWho
+				tx_sudhaus7newspage_tag.mapOnProperty = txSudhaus7newspageTag
+				tx_sudhaus7newspage_tag.config {
+					MM = tx_sudhaus7newspage_domain_tag_mm
+					foreign_table = tx_sudhaus7newspage_domain_model_tag
+				}
+			}
+		}
+	}
+}
+config.content_from_pid_allowOutsideDomain = 1
