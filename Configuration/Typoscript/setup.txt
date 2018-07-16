@@ -31,13 +31,10 @@ plugin.tx_sudhaus7newspage {
 					columns {
 						sorting.mapOnProperty = sorting
 						tx_sudhaus7newspage_from.mapOnProperty = txSudhaus7newspageFrom
-						tx_sudhaus7newspage_to.mapOnProperty = txSudhaus7newspageTo
-						tx_sudhaus7newspage_type.mapOnProperty = txSudhaus7newspageType
 						tx_sudhaus7newspage_showdate.mapOnProperty = txSudhaus7newspageShowdate
 						tx_sudhaus7newspage_showtime.mapOnProperty = txSudhaus7newspageShowtime
 						tx_sudhaus7newspage_highlight.mapOnProperty = txSudhaus7newspageHighlight
-						tx_sudhaus7newspage_place.mapOnProperty = txSudhaus7newspagePlace
-						tx_sudhaus7newspage_who.mapOnProperty = txSudhaus7newspageWho
+
 
 						tx_sudhaus7newspage_tag.mapOnProperty = txSudhaus7newspageTag
 						tx_sudhaus7newspage_tag.config {
@@ -57,13 +54,9 @@ config.tx_extbase.persistence.classes {
 			columns {
 				sorting.mapOnProperty = sorting
 				tx_sudhaus7newspage_from.mapOnProperty = txSudhaus7newspageFrom
-				tx_sudhaus7newspage_to.mapOnProperty = txSudhaus7newspageTo
-				tx_sudhaus7newspage_type.mapOnProperty = txSudhaus7newspageType
 				tx_sudhaus7newspage_showdate.mapOnProperty = txSudhaus7newspageShowdate
 				tx_sudhaus7newspage_showtime.mapOnProperty = txSudhaus7newspageShowtime
 				tx_sudhaus7newspage_highlight.mapOnProperty = txSudhaus7newspageHighlight
-				tx_sudhaus7newspage_place.mapOnProperty = txSudhaus7newspagePlace
-				tx_sudhaus7newspage_who.mapOnProperty = txSudhaus7newspageWho
 				tx_sudhaus7newspage_tag.mapOnProperty = txSudhaus7newspageTag
 				tx_sudhaus7newspage_tag.config {
 					MM = tx_sudhaus7newspage_domain_tag_mm
@@ -73,4 +66,4 @@ config.tx_extbase.persistence.classes {
 		}
 	}
 }
-config.content_from_pid_allowOutsideDomain = 1
+#config.content_from_pid_allowOutsideDomain = 1
