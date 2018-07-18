@@ -35,7 +35,6 @@ plugin.tx_sudhaus7newspage {
 						tx_sudhaus7newspage_showtime.mapOnProperty = txSudhaus7newspageShowtime
 						tx_sudhaus7newspage_highlight.mapOnProperty = txSudhaus7newspageHighlight
 
-
 						tx_sudhaus7newspage_tag.mapOnProperty = txSudhaus7newspageTag
 						tx_sudhaus7newspage_tag.config {
 							MM = tx_sudhaus7newspage_domain_tag_mm

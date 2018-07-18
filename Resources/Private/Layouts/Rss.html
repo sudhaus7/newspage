@@ -1,0 +1,23 @@
+<html data-namespace-typo3-fluid="true">
+{namespace s7=SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+     xmlns:slash="http://purl.org/rss/1.0/modules/slash/">
+    <channel>
+        <title>{settings.sitename}</title>
+        <link>
+        <f:uri.page absolute="1" pageUid="{settings.storagePid}"></f:uri.page>
+        </link>
+        <atom:link href="{f:uri.page(absolute:1 pageUid:data.uid)}" rel="self" type="application/rss+xml" />
+        <description>{settings.latestTitle}</description>
+        <language>de-de</language>
+        <pubDate><s7:date format="RSS" date="now"/></pubDate>
+        <lastBuildDate><s7:date format="RSS" date="now"/></lastBuildDate>
+        <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+        <generator>Sudhaus7 Newspage</generator>
+        <managingEditor></managingEditor>
+        <webMaster></webMaster>
+        <f:render section="main" />
+    </channel>
+</rss>
+</html>

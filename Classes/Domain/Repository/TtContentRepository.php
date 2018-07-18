@@ -221,7 +221,7 @@ class TtContentRepository extends Repository
         $ids = GeneralUtility::trimExplode(',', $id, true);
         foreach ($ids as $checkid) {
             \array_push($aList, $checkid);
-            $list = $query->getTreeList($id, $depth, 0, '1=1'.BackendUtility::BEenableFields('pages'));
+            $list = $query->getTreeList($checkid, $depth, 0, '1=1'.BackendUtility::BEenableFields('pages'));
             $aList = \array_merge($aList, GeneralUtility::trimExplode(',', $list, true));
         }
 

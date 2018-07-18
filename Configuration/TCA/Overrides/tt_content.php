@@ -2,8 +2,8 @@
 call_user_func(function () {
     global $TCA;
     $_EXTKEY = 'sudhaus7_newspage';
-    $languageFilePrefix = 'LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:';
-    $frontendLanguageFilePrefix = 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:';
+    $languageFilePrefix = 'LLL:EXT:'.$_EXTKEY.'/Resources/Private/Language/locallang.xlf:';
+    $frontendLanguageFilePrefix = 'LLL:EXT:'.'frontend/Resources/Private/Language/locallang_ttc.xlf:';
 
     $confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['sudhaus7_newspage']);
     if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('sudhaus7_geomap')) {

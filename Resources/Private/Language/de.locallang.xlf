@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-09-12T13:49:12Z">
+        <header>
+            <generator>LFEditor</generator>
+        </header>
+        <body>
+            <trans-unit id="bodytext_formlabel" xml:space="preserve">
+				<source>Teaser</source>
+				<target>Teaser</target>
+			</trans-unit>
+            <trans-unit id="tt_content.sudhaus7newspage_element" xml:space="preserve">
+				<source>News/Event/Project Element</source>
+                <target>Meldung</target>
+			</trans-unit>
+			<trans-unit id="tt_content.sudhaus7newspage_element.description" xml:space="preserve">
+				<source>Mark this page as News</source>
+                <target>Dieses Element markiert die Seite als Meldung</target>
+			</trans-unit>
+			<trans-unit id="tt_content.sudhaus7newspage_plugin" xml:space="preserve">
+				<source>News/Event/Project Listing</source>
+                <target>Meldungen ausgeben</target>
+			</trans-unit>
+			<trans-unit id="tt_content.sudhaus7newspage_plugin.description" xml:space="preserve">
+				<source>List the News/Event/Project Elements</source>
+                <target>Listet Meldungen in verschiedenen Formaten auf</target>
+			</trans-unit>
+			<trans-unit id="element.flex.type" xml:space="preserve">
+				<source>Type of this page</source>                 <target>Art der Meldung</target>
+			</trans-unit>
+			<trans-unit id="element.flex.type.pleaseselect" xml:space="preserve">
+				<source>-- please select</source>                 <target>-- bitte wählen</target>
+			</trans-unit>
+			<trans-unit id="element.flex.type.news" xml:space="preserve">
+				<source>News</source>                 <target>Meldung/Nachricht/Pressemitteilung</target>
+			</trans-unit>
+			<trans-unit id="element.flex.type.event" xml:space="preserve">
+				<source>Event</source>                 <target>Event</target>
+			</trans-unit>
+			<trans-unit id="element.flex.type.project" xml:space="preserve">
+				<source>Project</source>                 <target>Projekt</target>
+			</trans-unit>
+			<trans-unit id="element.flex.news.date" xml:space="preserve">
+				<source>Event</source>                 <target>Datum</target>
+			</trans-unit>
+			<trans-unit id="element.flex.news.from" xml:space="preserve">
+				<source>Date/From</source>                 <target>Datum von</target>
+			</trans-unit>
+			<trans-unit id="element.flex.news.to" xml:space="preserve">
+				<source>To</source>                 <target>Datum bis</target>
+			</trans-unit>
+			<trans-unit id="element.flex.calendar" xml:space="preserve">
+				<source>Calendar for displaying event</source>
+				<target>Kalender zum Eintragen des Termins</target>
+			</trans-unit>
+			<trans-unit id="element.flex.showdate" xml:space="preserve">
+				<source>Display Date in Frontend</source>                 <target>Datum auf der Webseite anzeigen</target>
+			</trans-unit>
+			<trans-unit id="element.flex.showtime" xml:space="preserve">
+				<source>Show Time in Frontend</source>                 <target>Uhrzeit auf der Webseite anzeigen</target>
+			</trans-unit>
+			<trans-unit id="element.flex.showimageindetail" xml:space="preserve">
+				<source>Display Image on Detail Page</source>
+				<target>Bild auf der Detailseite anzeigen</target>
+			</trans-unit>
+			<trans-unit id="element.flex.highlight" xml:space="preserve">
+				<source>Mark this Page as Highlight/Important</source>                 <target>Markiere diese Meldung als wichtig</target>
+			</trans-unit>
+			<trans-unit id="element.flex.news.tags" xml:space="preserve">
+				<source>Tags/Categories</source>                 <target>Tags / Kategorien</target>
+			</trans-unit>
+			<trans-unit id="element.flex.news.latlng" xml:space="preserve">
+				<source>Geographical Position</source>                 <target>Geographische angabe</target>
+			</trans-unit>
+			<trans-unit id="element.flex.who" xml:space="preserve">
+				<source>Veranstalter</source>                 <target>Veranstalter</target>
+			</trans-unit>
+			<trans-unit id="element.flex.place" xml:space="preserve">
+				<source>Ort</source>                 <target>Ort</target>
+			</trans-unit>
+			<trans-unit id="plugin.tags" xml:space="preserve">
+				<source>if selected, display any Records with any of these Tags/Categories</source>                 <target>Zeige nur Einträge mit diesen Tags / Kategorien</target>
+			</trans-unit>
+			<trans-unit id="plugin.action" xml:space="preserve">
+				<source>Type of Listing</source>                 <target>Art der Auflistung</target>
+			</trans-unit>
+			<trans-unit id="plugin.action.list" xml:space="preserve">
+				<source>List/Archive</source>                 <target>Liste mit Blätterfunktion / Archiv</target>
+			</trans-unit>
+			<trans-unit id="plugin.action.latest" xml:space="preserve">
+				<source>Latest news</source>                 <target>Aktuellste Einträge</target>
+			</trans-unit>
+			<trans-unit id="plugin.action.rss" xml:space="preserve">
+				<source>RSS Feed</source>                 <target>RSS Feed</target>
+			</trans-unit>
+			<trans-unit id="plugin.action.random" xml:space="preserve">
+				<source>Random News</source>                 <target>Zufällige auswahl von Einträgen</target>
+			</trans-unit>
+			<trans-unit id="plugin.max" xml:space="preserve">
+				<source>Show this many news</source>                 <target>Zeige diese Anzahl Einträge (pro Seite)</target>
+			</trans-unit>
+
+
+			<trans-unit id="plugin.randomSkip" xml:space="preserve">
+				<source>Skip this many latest news from the Random selection</source>
+				<target>Filtere diese Menge an aktuellsten Einträgen aus der Zufallsselektion heraus</target>
+			</trans-unit>
+
+
+			<trans-unit id="plugin.highlights" xml:space="preserve">
+				<source>Only show highlights (disables paging)</source>                 <target>Zeige nur als wichtig markierte Einträge</target>
+			</trans-unit>
+			<trans-unit id="plugin.sortby" xml:space="preserve">
+				<source>Sort direction</source>                 <target>Sortierung</target>
+			</trans-unit>
+			<trans-unit id="plugin.sortby.asc" xml:space="preserve">
+				<source>Ascending</source>                 <target>Sortiere aufsteigend (alt nach neu)</target>
+			</trans-unit>
+			<trans-unit id="plugin.sortby.desc" xml:space="preserve">
+				<source>Descending</source>                 <target>Sortiere absteigend (neu nach alt)</target>
+			</trans-unit>
+			<trans-unit id="plugin.sortby.random" xml:space="preserve">
+				<source>Random</source>                 <target>Sortiere zufällig</target>
+			</trans-unit>
+			<trans-unit id="plugin.startpage" xml:space="preserve">
+				<source>Search News from this page</source>                 <target>Ab dieser Seite nach Einträgen suchen</target>
+			</trans-unit>
+
+			<trans-unit id="plugin.depth" xml:space="preserve">
+				<source>Recursive Level</source>                 <target>Anzahl der Ebenen</target>
+			</trans-unit>
+
+			<trans-unit id="plugin.scope" xml:space="preserve">
+				<source>The Scope of the Listing</source>                 <target>Einschränkungen in der Auflistung</target>
+			</trans-unit>
+			<trans-unit id="plugin.scope.all" xml:space="preserve">
+				<source>All Records</source>                 <target>Alle Einträge anzeigen</target>
+			</trans-unit>
+			<trans-unit id="plugin.scope.past" xml:space="preserve">
+				<source>Only Past Records</source>                 <target>Nur vergangene Einträge anzeigen</target>
+			</trans-unit>
+			<trans-unit id="plugin.scope.future" xml:space="preserve">
+				<source>Only Future Records</source>                 <target>Nur in der Zukunft liegende Einträge anzeigen</target>
+			</trans-unit>
+
+
+			<trans-unit id="plugin.datetimeStringForFilteringNews" xml:space="preserve">
+				<source>Start filtering News from </source>
+				<target>Zeige Meldung ab / bis</target>
+			</trans-unit>
+			<trans-unit id="plugin.datetimeStringForFilteringNews.today" xml:space="preserve">
+				<source>same day as news-date</source>
+				<target>zum selben Tag wie das Meldungs-datum</target>
+			</trans-unit>
+			<trans-unit id="plugin.datetimeStringForFilteringNews.yesterday" xml:space="preserve">
+				<source>one day before the news-date</source>
+				<target>einen Tag vor dem Meldungs-datum</target>
+			</trans-unit>
+			<trans-unit id="plugin.datetimeStringForFilteringNews.tomorrow" xml:space="preserve">
+				<source>one day after the news-date</source>
+				<target>einen Tag nach dem Meldungs-datum</target>
+			</trans-unit>
+
+
+
+			<trans-unit id="plugin.displaytype" xml:space="preserve">
+				<source>What to Display</source>                 <target>Was soll angezeigt werden</target>
+			</trans-unit>
+			<trans-unit id="plugin.displaytype.news" xml:space="preserve">
+				<source>News</source>                 <target>Meldungen</target>
+			</trans-unit>
+			<trans-unit id="plugin.displaytype.events" xml:space="preserve">
+				<source>Events</source>                 <target>Termine</target>
+			</trans-unit>
+			<trans-unit id="plugin.displaytype.projects" xml:space="preserve">
+				<source>Projects</source>                 <target>Projekte</target>
+			</trans-unit>
+			<trans-unit id="plugin.displaytype.newsevents" xml:space="preserve">
+				<source>News + Events</source>                 <target>Meldungen + Termine</target>
+			</trans-unit>
+			<trans-unit id="tx_sudhaus7newspage_domain_model_tag" xml:space="preserve">
+				<source>Newspage Tag</source>                 <target>Meldungen Tag</target>
+			</trans-unit>
+			<trans-unit id="tx_sudhaus7newspage_domain_model_tag.title" xml:space="preserve">
+				<source>Tag Label</source>                 <target>Titel</target>
+			</trans-unit>
+			<trans-unit id="tx_sudhaus7newspage_domain_model_tag.category" xml:space="preserve">
+				<source>Tag Category</source>                 <target>Kategory</target>
+			</trans-unit>
+			<trans-unit id="tx_sudhaus7newspage_domain_model_tag.category.country" xml:space="preserve">
+				<source>Country</source>                 <target>Land</target>
+			</trans-unit>
+			<trans-unit id="tx_sudhaus7newspage_domain_model_tag.category.topic" xml:space="preserve">
+				<source>Topic</source>                 <target>Thema</target>
+			</trans-unit>
+			<trans-unit id="tx_sudhaus7newspage_domain_model_tag.parent_tag" xml:space="preserve">
+				<source>Parent Tag</source>                 <target>Eltern Tag</target>
+			</trans-unit>
+			<trans-unit id="plugin.latestTemplate" xml:space="preserve">
+				<source>Template used in latest listing</source>
+				<target>Vorlage für Aktuellste Einträge</target>
+			</trans-unit>
+			<trans-unit id="plugin.latestTemplate.default" xml:space="preserve">
+				<source>Standard</source>
+				<target>Standard</target>
+			</trans-unit>
+			<trans-unit id="plugin.listTemplate" xml:space="preserve">
+				<source>Template used in archive listing</source>
+				<target>Vorlage für Archiv Einträge</target>
+			</trans-unit>
+			<trans-unit id="plugin.listTemplate.default" xml:space="preserve">
+				<source>Standard</source>
+				<target>Standard</target>
+			</trans-unit>
+
+
+        </body>
+    </file>
+</xliff>

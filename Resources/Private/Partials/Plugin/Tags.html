@@ -1,0 +1,7 @@
+<f:if condition="{tags}">
+    <span class="event-type">
+        <f:for each="{tags}" as="tag" iteration="iterator">
+            {tag.title}<f:if condition="{iterator.isLast} != 1">, </f:if>
+        </f:for>
+    </span><br />
+</f:if>

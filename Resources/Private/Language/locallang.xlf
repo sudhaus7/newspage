@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-09-12T13:49:12Z">
+		<header>
+			<generator>LFEditor</generator>
+		</header>
+		<body>
+			<trans-unit id="news_page_type" xml:space="preserve">
+				<source>News Page</source>
+			</trans-unit>
+			<trans-unit id="bodytext_formlabel" xml:space="preserve">
+				<source>Teaser</source>
+			</trans-unit>
+			<trans-unit id="tt_content.sudhaus7newspage_element" xml:space="preserve">
+				<source>News Element</source>
+			</trans-unit>
+			<trans-unit id="tt_content.sudhaus7newspage_element.description" xml:space="preserve">
+				<source>Mark this page as News</source>
+			</trans-unit>
+			<trans-unit id="tt_content.sudhaus7newspage_plugin" xml:space="preserve">
+				<source>News Listing</source>
+			</trans-unit>
+			<trans-unit id="tt_content.sudhaus7newspage_plugin.description" xml:space="preserve">
+				<source>List Pages containing news</source>
+			</trans-unit>
+
+			<trans-unit id="element.flex.news.from" xml:space="preserve">
+				<source>Date/From</source>
+			</trans-unit>
+			<trans-unit id="element.flex.news.to" xml:space="preserve">
+				<source>To</source>
+			</trans-unit>
+
+
+			<trans-unit id="element.flex.showimageindetail" xml:space="preserve">
+				<source>Display Image on Detail Page</source>
+			</trans-unit>
+			<trans-unit id="element.flex.showdate" xml:space="preserve">
+				<source>Display Date in Frontend</source>
+			</trans-unit>
+			<trans-unit id="element.flex.showtime" xml:space="preserve">
+				<source>Show Time in Frontend</source>
+			</trans-unit>
+			<trans-unit id="element.flex.highlight" xml:space="preserve">
+				<source>Mark this Page as Highlight/Important</source>
+			</trans-unit>
+			<trans-unit id="element.flex.news.tags" xml:space="preserve">
+				<source>Tags/Categories</source>
+			</trans-unit>
+			<trans-unit id="plugin.tags" xml:space="preserve">
+				<source>if selected, display any Records with any of these Tags/Categories</source>
+			</trans-unit>
+			<trans-unit id="plugin.action" xml:space="preserve">
+				<source>Type of Listing</source>
+			</trans-unit>
+			<trans-unit id="plugin.action.list" xml:space="preserve">
+				<source>List/Archive</source>
+			</trans-unit>
+			<trans-unit id="plugin.action.latest" xml:space="preserve">
+				<source>Latest news</source>
+			</trans-unit>
+			<trans-unit id="plugin.action.rss" xml:space="preserve">
+				<source>RSS Feed</source>
+			</trans-unit>
+			<trans-unit id="plugin.max" xml:space="preserve">
+				<source>Show this many news</source>
+			</trans-unit>
+
+			<trans-unit id="plugin.highlights" xml:space="preserve">
+				<source>Only show highlights (disables paging)</source>
+			</trans-unit>
+			<trans-unit id="plugin.ignore" xml:space="preserve">
+                <source>Ignore this many news</source>
+            </trans-unit>
+            <trans-unit id="plugin.onlyIgnoreHighlights" xml:space="preserve">
+                <source>Only ignore highlights</source>
+            </trans-unit>
+			<trans-unit id="plugin.sortby" xml:space="preserve">
+				<source>Sort direction</source>
+			</trans-unit>
+			<trans-unit id="plugin.sortby.asc" xml:space="preserve">
+				<source>Ascending</source>
+			</trans-unit>
+			<trans-unit id="plugin.sortby.desc" xml:space="preserve">
+				<source>Descending</source>
+			</trans-unit>
+			<trans-unit id="plugin.startpage" xml:space="preserve">
+				<source>Search News from this page</source>
+			</trans-unit>
+
+			<trans-unit id="plugin.depth" xml:space="preserve">
+				<source>Recursive Level</source>
+			</trans-unit>
+
+			<trans-unit id="plugin.datetimeStringForFilteringNews" xml:space="preserve">
+				<source>Start filtering News from </source>
+			</trans-unit>
+			<trans-unit id="plugin.datetimeStringForFilteringNews.today" xml:space="preserve">
+				<source>the same day as the news-date</source>
+			</trans-unit>
+			<trans-unit id="plugin.datetimeStringForFilteringNews.yesterday" xml:space="preserve">
+				<source>one day before the news-date</source>
+			</trans-unit>
+			<trans-unit id="plugin.datetimeStringForFilteringNews.tomorrow" xml:space="preserve">
+				<source>one day after the news-date</source>
+			</trans-unit>
+
+			<trans-unit id="plugin.latestTemplate" xml:space="preserve">
+				<source>Template used in latest listing</source>
+			</trans-unit>
+
+			<trans-unit id="plugin.latestTemplate.default" xml:space="preserve">
+				<source>Standard</source>
+			</trans-unit>
+
+
+
+			<trans-unit id="plugin.listTemplate" xml:space="preserve">
+				<source>Template used in archive listing</source>
+			</trans-unit>
+
+			<trans-unit id="plugin.listTemplate.default" xml:space="preserve">
+				<source>Standard</source>
+			</trans-unit>
+
+
+			<trans-unit id="tx_sudhaus7newspage_domain_model_tag" xml:space="preserve">
+				<source>Newspage Tag</source>
+			</trans-unit>
+			<trans-unit id="tx_sudhaus7newspage_domain_model_tag.title" xml:space="preserve">
+				<source>Tag Label</source>
+			</trans-unit>
+			<trans-unit id="tx_sudhaus7newspage_domain_model_tag.parent_tag" xml:space="preserve">
+				<source>Parent Tag</source>
+			</trans-unit>
+
+		</body>
+	</file>
+</xliff>

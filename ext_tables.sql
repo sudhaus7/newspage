@@ -10,8 +10,8 @@ CREATE TABLE tt_content (
 CREATE TABLE tx_sudhaus7newspage_domain_model_tag (
   uid int(11) NOT NULL auto_increment,
   pid int(11) NOT NULL DEFAULT '0',
-  title varchar(255) NOT NULL DEFAULT '',
-  category varchar(255) NOT NULL DEFAULT '',
+
+
   tstamp int(11) unsigned NOT NULL DEFAULT '0',
   crdate int(11) unsigned NOT NULL DEFAULT '0',
   cruser_id int(11) unsigned NOT NULL DEFAULT '0',
@@ -24,12 +24,7 @@ CREATE TABLE tx_sudhaus7newspage_domain_model_tag (
   relation int(11) NOT NULL DEFAULT '0',
 
   parent_tag int(11) NOT NULL DEFAULT '0',
-  map int(6) NOT NULL DEFAULT '0',
-  geodata varchar(64) NOT NULL DEFAULT '',
-  georatio int(11) NOT NULL DEFAULT '0',
-  countrydesc text,
-  churchdesc text,
-  staffdesc text,
+  title varchar(255) NOT NULL DEFAULT '',
 
   PRIMARY KEY (uid),
   KEY parent (pid),

@@ -1,0 +1,22 @@
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
+<f:layout name="Default" />
+<f:section name="main">
+    {namespace bf=SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers}
+    <f:for each="{news}" as="record">
+        <div class="row newseventlist">
+            <div class="row titlerow">
+                <h3><f:render partial="Plugin/Date.html" arguments="{record:record}" /></h3>
+                <h2>{record.header}</h2>
+            </div>
+            <div class="row previewtextrow">
+                <p>{record.bodytext}</p>
+            </div>
+            <div class="row linkrow">
+                <p><f:link.page class="eventnewslink" pageUid="{record.pid}">mehr lesen</f:link.page></p>
+            </div>
+        </div>
+    </f:for>
+    <f:render partial="Pager.html" arguments="{pager:pager}" />
+</f:section>
+</div>

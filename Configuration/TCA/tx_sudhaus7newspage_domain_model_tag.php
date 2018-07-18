@@ -27,7 +27,7 @@ return array(
         'showRecordFieldList' => 'hidden, title',
     ),
     'types' => array(
-        '1' => array('showitem' => '--palette--;Anzeige;1,title,parent_tag,--div--;Geoinformationen,map,geodata,georatio,countrydesc,churchdesc,staffdesc,--div--;Relationen,relation'),
+        '1' => array('showitem' => '--palette--;Anzeige;1,title,parent_tag,--div--;Relationen,relation'),
     ),
     'palettes' => array(
         '1' => array('showitem' => 'hidden,sys_language_uid,t3ver_label,l10n_parent'),
@@ -70,7 +70,7 @@ return array(
         ),
         't3ver_label' => array(
             'displayCond' => 'FIELD:t3ver_label:REQ:true',
-            'label' => 'LLL:EXT:lang/locallang_general.php:LGL.versionLabel',
+            'label' => 'LLL:EXT:'.'lang/locallang_general.php:LGL.versionLabel',
             'config' => array(
                 'type'=>'none',
                 'cols' => 27
@@ -92,19 +92,7 @@ return array(
                 'eval' => 'trim'
             ),
         ),
-        'category' => array(
-            'exclude' => 0,
-            'l10n_mode' => 'exclude',
-            'label' => 'LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:tx_sudhaus7newspage_domain_model_tag.category',
-            'config' => array(
-                'type' => 'select',
-                'renderType'=>'selectSingle',
-                'items' => array(
-                    array('LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:tx_sudhaus7newspage_domain_model_tag.category.country', 'LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:tx_sudhaus7newspage_domain_model_tag.category.country'),
-                    array('LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:tx_sudhaus7newspage_domain_model_tag.category.topic', 'LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:tx_sudhaus7newspage_domain_model_tag.category.topic'),
-                )
-            ),
-        ),
+
         'relation'=>array(
             'exclude' => 1,
             'l10n_mode' => 'exclude',
@@ -144,121 +132,5 @@ return array(
                 )
             )
         ),
-
-        'geodata' => array(
-            'exclude' => 1,
-            'l10n_mode' => 'exclude',
-            'label' => 'LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:tx_sudhaus7newspage_domain_model_tag.geodata',
-            'config' => array(
-                'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim',
-                "wizards" => array(
-                    "_PADDING" => 2,
-                    "link" => array(
-                        "type" => "popup",
-                        "title" => "Google Map GEO Selector",
-                        "icon" => "EXT:sudhaus7_geomap/Resources/Public/Icons/geo_popup.gif",
-                        'module' => array(
-                            'name' => 'wizard_sudhaus7geolocationpicker',
-                        ),
-                        "JSopenParams" => "height=350,width=500,status=0,menubar=0,scrollbars=1"
-                    ),
-                ),
-            ),
-        ),
-        'georatio' => array(
-            'exclude' => 1,
-            'l10n_mode' => 'exclude',
-            'label' => 'LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:tx_sudhaus7newspage_domain_model_tag.georatio',
-            'config' => array(
-                'type' => 'input',
-                'size' => 5,
-                'eval' => 'trim,num'
-            ),
-        ),
-
-        'map'=> array(
-            'exclude' => 1,
-            'l10n_mode' => 'exclude',
-            'label' => 'LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:tx_sudhaus7newspage_domain_model_tag.map',
-            'config'=>\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('map', array(
-                'maxitems' => 1,
-            ))
-        ),
-
-        'countrydesc' => array(
-            'exclude' => 1,
-            'defaultExtras' => 'richtext:rte_transform[mode=ts_css]',
-            'l10n_mode' => 'mergeIfNotBlank',
-            'label' => 'LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:tx_sudhaus7newspage_domain_model_tag.countrydesc',
-            'config' => array(
-                'type' => 'text',
-                'cols' => '80',
-                'rows' => '40',
-                'softref' => 'typolink_tag,images,email[subst],url',
-                'wizards' => array(
-                    'RTE' => array(
-                        'notNewRecords' => 1,
-                        'RTEonly' => 1,
-                        'type' => 'script',
-                        'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
-                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
-                        'module' => array(
-                            'name' => 'wizard_rte'
-                        )
-                    )
-                )
-            ),
-        ),
-        'churchdesc' => array(
-            'exclude' => 1,
-            'defaultExtras' => 'richtext:rte_transform[mode=ts_css]',
-            'l10n_mode' => 'mergeIfNotBlank',
-            'label' => 'LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:tx_sudhaus7newspage_domain_model_tag.churchdesc',
-            'config' => array(
-                'type' => 'text',
-                'cols' => '80',
-                'rows' => '40',
-                'softref' => 'typolink_tag,images,email[subst],url',
-                'wizards' => array(
-                    'RTE' => array(
-                        'notNewRecords' => 1,
-                        'RTEonly' => 1,
-                        'type' => 'script',
-                        'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
-                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
-                        'module' => array(
-                            'name' => 'wizard_rte'
-                        )
-                    )
-                )
-            ),
-        ),
-        'staffdesc' => array(
-            'exclude' => 1,
-            'defaultExtras' => 'richtext:rte_transform[mode=ts_css]',
-            'l10n_mode' => 'mergeIfNotBlank',
-            'label' => 'LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:tx_sudhaus7newspage_domain_model_tag.staffdesc',
-            'config' => array(
-                'type' => 'text',
-                'cols' => '80',
-                'rows' => '40',
-                'softref' => 'typolink_tag,images,email[subst],url',
-                'wizards' => array(
-                    'RTE' => array(
-                        'notNewRecords' => 1,
-                        'RTEonly' => 1,
-                        'type' => 'script',
-                        'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
-                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
-                        'module' => array(
-                            'name' => 'wizard_rte'
-                        )
-                    )
-                )
-            ),
-        ),
-
     ),
 );

@@ -1,0 +1,19 @@
+
+<ul class="pagination">
+    <li class="{f:if(condition:pager.current,then:'waves-effect',else:'disabled')}">
+        <f:link.action arguments="{page: pager.prev.page}">
+            <i class="material-icons">chevron_left</i>
+        </f:link.action>
+    </li>
+    <f:for each="{pager.pages}" as="page">
+        <li class="{f:if(condition:page.isactive,then:'active',else:'waves-effect')}">
+            <f:link.action arguments="{page: page.page}">{page.label}</f:link.action>
+        </li>
+    </f:for>
+
+    <li class="{f:if(condition:pager.next.page,then:'waves-effect',else:'disabled')}">
+        <f:link.action  arguments="{page: pager.next.page}">
+            <i class="material-icons">chevron_right</i>
+        </f:link.action>
+    </li>
+</ul>

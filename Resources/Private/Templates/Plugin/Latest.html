@@ -1,0 +1,43 @@
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
+<f:layout name="Plain"/>
+<f:section name="main">
+    {namespace bf=SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers}
+    <div id="carousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner" role="listbox">
+            <f:for each="{news}" as="record" iteration="itemiterator">
+                <f:if condition="{itemiterator.isFirst} == 1">
+                    <f:then><div class="item active"></f:then>
+                    <f:else><div class="item"></f:else>
+                </f:if>
+                    <f:for each="{record.image}" as="img" iteration="iterator">
+                        <f:if condition="{iterator.isFirst} == 1"><f:image treatIdAsReference="1" src="{img.uid}" alt="" width="1281" height="427c"/></f:if>
+                    </f:for>
+                    <div class="imgtext">
+                        <div class="container">
+                            <dl>
+                                <dt>
+                                    <f:render partial="Plugin/Date.html" arguments="{record:record}" />
+                                </dt>
+                                <dd>
+                                    <h4>{record.header}</h4>
+                                    <p>
+                                        {record.bodytext}
+                                        <f:link.page pageUid="{record.pid}">lesen Sie mehr</f:link.page>
+                                    </p>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </f:for>
+        </div>
+        <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</f:section>
+</div>
