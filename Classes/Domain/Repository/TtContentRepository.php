@@ -1,6 +1,6 @@
 <?php
 
-namespace SUDHAUS7\Sudhaus7Newspage\Domain\Repository;
+namespace SUDHAUS7\Newspage\Domain\Repository;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Database\QueryGenerator;
@@ -12,7 +12,7 @@ use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
 /**
  * Class TtContentRepository
  *
- * @package SUDHAUS7\Sudhaus7Newspage\Domain\Repository
+ * @package SUDHAUS7\Newspage\Domain\Repository
  */
 class TtContentRepository extends Repository
 {
@@ -42,7 +42,7 @@ class TtContentRepository extends Repository
         $query->setQuerySettings($querySettings);
         $order = $settings['sortby']=='desc' ? QueryInterface::ORDER_DESCENDING : QueryInterface::ORDER_ASCENDING;
 
-        $query->setOrderings(array('tx_sudhaus7newspage_from'=>$order));
+        $query->setOrderings(array('tx_newspage_from'=>$order));
 
 
         $this->addStandardConstraints($query, $settings);
@@ -92,8 +92,8 @@ class TtContentRepository extends Repository
         if (!isset($settings['displaytype']) || empty($settings['displaytype'])) {
             $settings['displaytype'] = 1;
         }
-        $constraints[] = $query->equals('tx_sudhaus7newspage_type', $settings['displaytype']);
-        $constraints[] = $query->equals('ctype', 'sudhaus7newspage_element');
+        $constraints[] = $query->equals('tx_newspage_type', $settings['displaytype']);
+        $constraints[] = $query->equals('ctype', 'newspage_element');
 
 
 
@@ -108,7 +108,7 @@ class TtContentRepository extends Repository
 
 
         if (isset($settings['highlights']) && !empty($settings['highlights'])) {
-            $constraints[]=$query->equals('tx_sudhaus7newspage_highlight', 1);
+            $constraints[]=$query->equals('tx_newspage_highlight', 1);
         }
 
 
@@ -116,8 +116,8 @@ class TtContentRepository extends Repository
             $from = new \DateTime($settings['month'].'-01 00:00:00');
             $to = new \DateTime($from->format('Y-m-t').' 23:59:59');
 
-            $constraints[]=$query->greaterThanOrEqual('tx_sudhaus7newspage_from', $from);
-            $constraints[]=$query->lessThanOrEqual('tx_sudhaus7newspage_from', $to);
+            $constraints[]=$query->greaterThanOrEqual('tx_newspage_from', $from);
+            $constraints[]=$query->lessThanOrEqual('tx_newspage_from', $to);
         }
 
 
@@ -128,10 +128,10 @@ class TtContentRepository extends Repository
             $now = new \DateTime($settings['datetimeStringForFilteringNews']);
             $from = new \DateTime($now->format('Y-m-d').' 00:00:00');
             if ($settings['scope']==1) {
-                $constraints[]=$query->lessThanOrEqual('tx_sudhaus7newspage_from', $from);
+                $constraints[]=$query->lessThanOrEqual('tx_newspage_from', $from);
             }
             if ($settings['scope']==2) {
-                $constraints[]=$query->greaterThanOrEqual('tx_sudhaus7newspage_from', $from);
+                $constraints[]=$query->greaterThanOrEqual('tx_newspage_from', $from);
             }
         }
 
@@ -146,7 +146,7 @@ class TtContentRepository extends Repository
         //return $query;
     }
 
-    public function findNextContent(\SUDHAUS7\Sudhaus7Newspage\Domain\Model\TtContent $news)
+    public function findNextContent(\SUDHAUS7\Newspage\Domain\Model\TtContent $news)
     {
         $query = $this->createQuery();
         $querySettings = $query->getQuerySettings();
@@ -195,7 +195,7 @@ class TtContentRepository extends Repository
 
     /**
      * @param $pages
-     * @param $tag
+     * @param \SUDHAUS7\Newspage\Domain\Model\Tag $tag
      *
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
@@ -211,6 +211,29 @@ class TtContentRepository extends Repository
         $query->matching(
             $query->contains('txSudhaus7newspageTag', $tag)
         );
+        return $query->execute();
+    }
+
+    /**
+     * @param $pages
+     * @param \SUDHAUS7\Newspage\Domain\Model\Tag[] $tags
+     *
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
+    public function findByMultipleTags($pages, $tags)
+    {
+        $query = $this->createQuery();
+        $querySettings = $query->getQuerySettings();
+        $querySettings->setRespectStoragePage(true);
+        $querySettings->setStoragePageIds($pages);
+        $querySettings->setLanguageUid($GLOBALS['TSFE']->sys_language_uid);
+        $query->setQuerySettings($querySettings);
+        $constraints = [];
+        foreach ($tags as $tag) {
+            $constraints[]= $query->contains('txSudhaus7newspageTag', $tag);
+        }
+        $query->matching($query->logicalAnd($constraints));
         return $query->execute();
     }
 

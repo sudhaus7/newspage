@@ -1,16 +1,16 @@
-plugin.tx_sudhaus7newspage {
+plugin.tx_newspage {
 	view {
-		# cat=plugin.tx_sudhaus7_newspage/file; type=string; label=Path to template root (FE)
-		templateRootPath = EXT:sudhaus7_newspage/Resources/Private/Templates/
-		# cat=plugin.tx_sudhaus7_newspage/file; type=string; label=Path to template partials (FE)
-		partialRootPath = EXT:sudhaus7_newspage/Resources/Private/Partials/
-		# cat=plugin.tx_sudhaus7_newspage/file; type=string; label=Path to template layouts (FE)
-		layoutRootPath = EXT:sudhaus7_newspage/Resources/Private/Layouts/
+		# cat=plugin.tx_newspage/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:newspage/Resources/Private/Templates/
+		# cat=plugin.tx_newspage/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:newspage/Resources/Private/Partials/
+		# cat=plugin.tx_newspage/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:newspage/Resources/Private/Layouts/
 	}
 
 	settings {
-		# cat=plugin.tx_sudhaus7_newspage/file; type=string; label=Path to CSS file
-		#cssFile = EXT:sudhaus7_newspage/Resources/Public/Css/sudhaus7_newspage-basic.css
+		# cat=plugin.tx_newspage/file; type=string; label=Path to CSS file
+		#cssFile = EXT:newspage/Resources/Public/Css/newspage-basic.css
 		replaceemptyshorts = 0
 	}
 }

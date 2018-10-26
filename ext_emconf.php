@@ -23,6 +23,7 @@ $EM_CONF[$_EXTKEY] = array(
     'depends' => array(
     ),
     'conflicts' => array(
+        'sudhaus7_newspage'=>'1.0.0',
     ),
     'suggests' => array(
     ),

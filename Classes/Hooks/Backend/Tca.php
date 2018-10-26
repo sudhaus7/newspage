@@ -6,16 +6,16 @@
  * Time: 14:19
  */
 
-namespace SUDHAUS7\Sudhaus7Newspage\Hooks\Backend;
+namespace SUDHAUS7\Newspage\Hooks\Backend;
 
-use TYPO3\CMS\Core\Database\DatabaseConnection;
+use TYPO3\CMS\Core\Database\Connection;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Database\QueryGenerator;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 class Tca
 {
-    public function tx_sudhaus7newspage_select($PA, $fObj)
+    public function tx_newspage_select($PA, $fObj)
     {
         $hookObjectsArr = [];
 
@@ -29,8 +29,9 @@ class Tca
         ORDER BY pages.sorting ASC
         ';
         $all =[];
-        if (is_array($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['SUDHAUS7\\Sudhaus7Newspage\\Hooks\\Backend\\Tca']['Hooks'])) {
-            foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['SUDHAUS7\\Sudhaus7Newspage\\Hooks\\Backend\\Tca']['Hooks'] as $classRef) {
+      
+        if (is_array($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['SUDHAUS7\\Newspage\\Hooks\\Backend\\Tca']['Hooks'])) {
+            foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['SUDHAUS7\\Newspage\\Hooks\\Backend\\Tca']['Hooks'] as $classRef) {
                 $hookObject = GeneralUtility::getUserObj($classRef);
                 if (method_exists($hookObject, 'alterRootQuery')) {
                     $query = $hookObject->alterRootQuery($query, $this);
@@ -38,33 +39,33 @@ class Tca
                 $hookObjectsArr[] = $hookObject;
             }
         }
-        $result = $this->getDb()->sql_query($query);
+        $result = $this->getDb()->executeQuery($query);
         $singleQuery ='
-            SELECT pages.*, tt_content.tx_sudhaus7newspage_from FROM pages
+            SELECT pages.*, tt_content.tx_newspage_from FROM pages
             JOIN tt_content
             ON tt_content.pid=pages.uid
-            AND tt_content.CType="sudhaus7newspage_element"
-            AND tt_content.tx_sudhaus7newspage_type=1
+            AND tt_content.CType="newspage_element"
+            AND tt_content.tx_newspage_type=1
             AND tt_content.hidden=0
             AND tt_content.deleted=0
             WHERE pages.hidden=0
             AND pages.deleted=0
             AND pages.uid in(%1$s)
-            ORDER BY tt_content.tx_sudhaus7newspage_from DESC
+            ORDER BY tt_content.tx_newspage_from DESC
             ';
         foreach ($hookObjectsArr as $hookObject) {
             if (method_exists($hookObject, 'alterSingleQuery')) {
                 $singleQuery = $hookObject->alterSingleQuery($singleQuery, $this);
             }
         }
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch(\PDO::FETCH_ASSOC)) {
             $all[$row['uid']] = [
                 'page' => $row
             ];
             $treeList = $queryGenerator->getTreeList($row['uid'], 10, 0, 1);
 
-            $res = $this->getDb()->sql_query(sprintf($singleQuery, $treeList));
-            while ($single = $res->fetch_assoc()) {
+            $res = $this->getDb()->executeQuery(sprintf($singleQuery, $treeList));
+            while ($single = $res->fetch(\PDO::FETCH_ASSOC)) {
                 $all[$row['uid']]['items'][] = $single;
             }
         }
@@ -76,7 +77,7 @@ class Tca
             $formfield .= '<optgroup label="'.$groups['page']['title'].'">';
             if ($groups['items']) {
                 foreach ($groups['items'] as $item) {
-                    $formfield .= '<option value="'.$item['uid'].'" '.(($item['uid'] == $actual) ? 'selected' : '').'>'.date('[d.m.Y H:i] ', $item['tx_sudhaus7newspage_from']).$item['title'].'</option>';
+                    $formfield .= '<option value="'.$item['uid'].'" '.(($item['uid'] == $actual) ? 'selected' : '').'>'.date('[d.m.Y H:i] ', $item['tx_newspage_from']).$item['title'].'</option>';
                 }
             }
             $formfield .= '</opgroup>';
@@ -87,11 +88,12 @@ class Tca
     }
 
     /**
-     * @return DatabaseConnection
+     * @return Connection
      */
     protected function getDb()
     {
-        return $GLOBALS['TYPO3_DB'];
+        return  GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getConnectionForTable('tt_content');
     }
 
     /**

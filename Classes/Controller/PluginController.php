@@ -1,8 +1,8 @@
 <?php
-namespace SUDHAUS7\Sudhaus7Newspage\Controller;
+namespace SUDHAUS7\Newspage\Controller;
 
 use SUDHAUS7\Sudhaus7Base\Tools\Globals;
-use SUDHAUS7\Sudhaus7Newspage\Domain\Model\TtContent;
+use SUDHAUS7\Newspage\Domain\Model\TtContent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use \TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
@@ -10,22 +10,37 @@ use \TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
 /**
  * Class PluginController
  *
- * @package SUDHAUS7\Sudhaus7Newspage\Controller
+ * @package SUDHAUS7\Newspage\Controller
  */
 class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
-
+    
     /**
-     * @var \SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TtContentRepository
-     * @inject
+     * @var \SUDHAUS7\Newspage\Domain\Repository\TtContentRepository
      */
     protected $content;
+    
+    /**
+     * @param TtContentRepository $ttContentRepository
+     */
+    public function injectTtContentRepository(\SUDHAUS7\Newspage\Domain\Repository\TtContentRepository $ttContentRepository)
+    {
+        $this->content = $ttContentRepository;
+    }
 
     /**
-     * @var \SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TagRepository
+     * @var \SUDHAUS7\Newspage\Domain\Repository\TagRepository
      * @inject
      */
     protected $tags;
+    
+    /**
+     * @param \SUDHAUS7\Newspage\Domain\Repository\TagRepository $tagRepository
+     */
+    public function injectTagRepository(\SUDHAUS7\Newspage\Domain\Repository\TagRepository $tagRepository)
+    {
+        $this->tags = $tagRepository;
+    }
 
     /**
      * @var \TYPO3\CMS\Core\Cache\CacheManager
@@ -39,7 +54,7 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     public function __construct()
     {
         parent::__construct();
-        $this->pageCache = GeneralUtility::makeInstance(CacheManager::class)->getCache('sudhaus7newspage_pagecache');
+        $this->pageCache = GeneralUtility::makeInstance(CacheManager::class)->getCache('newspage_pagecache');
     }
 
     /**
@@ -58,13 +73,12 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         }
         if ($this->request->hasArgument('tag')) {
             $selectedTag = GeneralUtility::trimExplode(',', $this->request->getArgument('tag'), true);
+            $this->settings['tags'] =  $this->request->getArgument('tag');
         }
 
         $this->settings['page'] = $this->request->hasArgument('page') ? $this->request->getArgument('page') : 0;
         $this->settings['month'] = $this->request->hasArgument('month') ? $this->request->getArgument('month') : null;
-        if ($this->request->hasArgument('tag')) {
-            $this->settings['tags'] =  $this->request->getArgument('tag');
-        }
+        
         list($pages, $linkMap) = $this->getPageIds();
         $news = $this->content->findNews($pages, $this->settings);
         if ($news->count() == 0 && $this->settings['highlights']) {
@@ -92,7 +106,7 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         }
         
         $this->mapNewspagePid($news, $linkMap);
-
+        
         $this->newsBeforeDisplay_dispatch($news, 'list');
 
         $this->view->assign('tags', $alltags);
@@ -130,15 +144,20 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             : 6;
 
         $list =  $this->content->getTreeList($ids, $depth);
-
+        
         if (empty($list)) {
             $list = $GLOBALS['TSFE']->rootLine[0]['uid'];
         }
+        
+        
+        
+        
+        
         if ($GLOBALS['TSFE']->sys_language_uid === 0) {
             $res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
                 'distinct pid',
                 'tt_content',
-                'ctype="sudhaus7newspage_element" '.
+                'ctype="newspage_element" '.
                     'and pid in ('.implode(',', $list).') '.
                     'and sys_language_uid= '.$GLOBALS['TSFE']->sys_language_uid.
                 $this->configurationManager->getContentObject()->enableFields('tt_content')
@@ -149,7 +168,7 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $sql = 'select distinct tt_content.pid '.
                     'from tt_content '.
                       'join tt_content tt2 on tt2.uid=tt_content.l18n_parent '.$enablefields2.
-                    'where tt_content.ctype="sudhaus7newspage_element" '.
+                    'where tt_content.ctype="newspage_element" '.
                         'and tt_content.deleted=0 '.
                         'and tt_content.hidden=0 '.
                         'and tt_content.pid in ('.implode(',', $list).')  '.
@@ -165,7 +184,7 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         }
 
         $result = array();
-        $clear_array_keys = array('sudhaus7newspage_element_root_'.$rootid,'pageId_' . $GLOBALS['TSFE']->id);
+        $clear_array_keys = array('newspage_element_root_'.$rootid,'pageId_' . $GLOBALS['TSFE']->id);
         while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_row($res)) {
             $result[]=$row[0];
             $clear_array_keys[] = 'pageId_'.$row[0];
@@ -221,7 +240,7 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     private function replaceEmptyShorts($news)
     {
         /**
-         * @var $msg \SUDHAUS7\Sudhaus7Newspage\Domain\Model\TtContent
+         * @var $msg \SUDHAUS7\Newspage\Domain\Model\TtContent
          */
         foreach ($news as $msg) {
             $short = $msg->getBodytext();
@@ -241,11 +260,12 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         }
         return $news;
     }
-
+    
     /**
      * @param $page
      * @return array
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     private function generatePager($page)
     {
@@ -357,86 +377,7 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $this->view->assign('news', $news);
         $this->view->assign('pages', $pages);
     }
-
-    /**
-     * @return string
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
-     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
-     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
-     */
-    public function randomAction()
-    {
-        //$this->settings['page'] = $this->request->hasArgument('page') ? $this->request->getArgument('page') : 0;
-        $alltags = $this->findTags();
-        $this->settings['page'] = 0;
-        $this->settings['month'] = $this->request->hasArgument('month')
-            ? $this->request->getArgument('month')
-            : null;
-
-        /** @var \TYPO3\CMS\Extbase\Persistence\QueryInterface $news */
-        if (!isset($this->settings['displaytype']) || empty($this->settings['displaytype'])) {
-            $this->settings['displaytype'] = 1;
-        }
-
-        list($pages, $linkMap) = $this->getPageIds();
-        $skipnews = array();
-        if ($this->settings['ignore'] > 0) {
-            $sql = 'select pages.uid  '.
-                    'from tt_content  '.
-                    'join pages on tt_content.pid=pages.uid  '.
-                        'and pages.uid in (' . implode(',', $pages).') '.
-                   $this->configurationManager->getContentObject()->enableFields('pages').
-                    ' where  '.
-                        ' tt_content.ctype="sudhaus7newspage_element" '.
-                        ' and tt_content.tx_sudhaus7newspage_type in ('.$this->settings['displaytype'].') '.
-                        ' and tt_content.deleted=0  '.
-                        ' and tt_content.hidden=0 '.$this->configurationManager->getContentObject()->enableFields('tt_content').
-                    ' order by tt_content.tx_sudhaus7newspage_from desc  '.
-                    ' limit 0,'.$this->settings['ignore'];
-            $res =  $GLOBALS['TYPO3_DB']->sql_query($sql);
-            while ($row= $GLOBALS['TYPO3_DB']->sql_fetch_row($res)) {
-                $skipnews[]=$row[0];
-            }
-            unset($this->settings['ignore']);
-        }
-
-        foreach ($pages as $k => $pid) {
-            if (in_array($pid, $skipnews)) {
-                unset($pages[$k]);
-            }
-        }
-        if (empty($pages)) {
-            return "";
-        }
-        $max = $this->settings['max'];
-
-        $this->settings['max'] = 999999;
-        $news = $this->content->findNews($pages, $this->settings);
-        $this->mapNewspagePid($news, $linkMap);
-        $news = $news->toArray();
-        $max = sizeof($news) < $max ? sizeof($news) : $max;
-        $rand_keys = array_rand($news, $max);
-        if (empty($rand_keys)) {
-            return '';
-        }
-        shuffle($rand_keys);
-        $randomnews = array();
-        foreach ($rand_keys as $key) {
-            $randomnews[] = $news[$key];
-        }
-
-
-        if ($this->settings['replaceemptyshorts']) {
-            $randomnews = $this->replaceEmptyShorts($randomnews);
-        }
-
-        $this->view->assign('tags', $alltags);
-        $this->view->assign('settings', $this->settings);
-        $this->view->assign('data', $this->configurationManager->getContentObject()->data);
-        $this->view->assign('news', $randomnews);
-    }
-
+    
     /**
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException

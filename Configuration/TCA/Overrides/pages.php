@@ -4,9 +4,9 @@ defined('TYPO3_MODE') or die();
 call_user_func(
     function ($extKey, $table) {
         $confArr =
-            unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['sudhaus7_newspage']);
+            unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['newspage']);
         if ($confArr['newspagetype']) {
-            $languageFilePrefix = 'LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:';
+            $languageFilePrefix = 'LLL:EXT:newspage/Resources/Private/Language/locallang.xlf:';
             $newsPageDoktype = 101;
             // Add new page type as possible select item:
             \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
@@ -15,7 +15,7 @@ call_user_func(
                 [
                     'LLL:EXT:' . $extKey . '/Resources/Private/Language/locallang.xlf:news_page_type',
                     $newsPageDoktype,
-                    'EXT:' . $extKey . 'Resources/Public/Images/tx_sudhaus7newspage_domain_model_tag.png'
+                    'EXT:' . $extKey . 'Resources/Public/Images/tx_newspage_domain_model_tag.png'
                 ],
                 '1',
                 'after'
@@ -62,7 +62,7 @@ call_user_func(
                     'content_from_pid' => [
                         'config' => [
                             'type' => 'user',
-                            'userFunc' => SUDHAUS7\Sudhaus7Newspage\Hooks\Backend\Tca::class.'->tx_sudhaus7newspage_select'
+                            'userFunc' => SUDHAUS7\Newspage\Hooks\Backend\Tca::class.'->tx_newspage_select'
                         ],
                         'wizards' => []
                     ]
@@ -70,6 +70,6 @@ call_user_func(
             ];
         }
     },
-    'sudhaus7_newspage',
+    'newspage',
     'pages'
 );

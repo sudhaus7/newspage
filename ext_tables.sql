@@ -1,17 +1,14 @@
 CREATE TABLE tt_content (
-  tx_sudhaus7newspage_from  int(11) unsigned NOT NULL DEFAULT '0',
-  tx_sudhaus7newspage_to  int(11) unsigned NOT NULL DEFAULT '0',
-  tx_sudhaus7newspage_tag  int(5) unsigned NOT NULL DEFAULT '0',
-  tx_sudhaus7newspage_showdate  int(1) unsigned NOT NULL DEFAULT '0',
-  tx_sudhaus7newspage_showtime  int(1) unsigned NOT NULL DEFAULT '0',
-  tx_sudhaus7newspage_highlight  int(1) unsigned NOT NULL DEFAULT '0'
+  tx_newspage_from  int(11) unsigned NOT NULL DEFAULT '0',
+  tx_newspage_tag  int(5) unsigned NOT NULL DEFAULT '0',
+  tx_newspage_showdate  int(1) unsigned NOT NULL DEFAULT '0',
+  tx_newspage_showtime  int(1) unsigned NOT NULL DEFAULT '0',
+  tx_newspage_highlight  int(1) unsigned NOT NULL DEFAULT '0'
 );
 
-CREATE TABLE tx_sudhaus7newspage_domain_model_tag (
+CREATE TABLE tx_newspage_domain_model_tag (
   uid int(11) NOT NULL auto_increment,
   pid int(11) NOT NULL DEFAULT '0',
-
-
   tstamp int(11) unsigned NOT NULL DEFAULT '0',
   crdate int(11) unsigned NOT NULL DEFAULT '0',
   cruser_id int(11) unsigned NOT NULL DEFAULT '0',
@@ -22,7 +19,7 @@ CREATE TABLE tx_sudhaus7newspage_domain_model_tag (
   l10n_parent int(11) NOT NULL DEFAULT '0',
   l10n_diffsource mediumblob,
   relation int(11) NOT NULL DEFAULT '0',
-
+  icon varchar(255) NOT NULL DEFAULT '',
   parent_tag int(11) NOT NULL DEFAULT '0',
   title varchar(255) NOT NULL DEFAULT '',
 
@@ -33,7 +30,7 @@ CREATE TABLE tx_sudhaus7newspage_domain_model_tag (
   KEY language (l10n_parent,sys_language_uid)
 );
 
-CREATE TABLE tx_sudhaus7newspage_domain_tag_mm (
+CREATE TABLE tx_newspage_domain_tag_mm (
   uid_local int(10) unsigned NOT NULL DEFAULT '0',
   uid_foreign int(10) unsigned NOT NULL DEFAULT '0',
   sorting int(10) unsigned NOT NULL DEFAULT '0',
@@ -44,8 +41,8 @@ CREATE TABLE tx_sudhaus7newspage_domain_tag_mm (
 
 
 #
-# Table structure for table cf_sudhaus7newspage_pagecache
-CREATE TABLE cf_sudhaus7newspage_pagecache (
+# Table structure for table cf_newspage_pagecache
+CREATE TABLE cf_newspage_pagecache (
     id int(11) unsigned NOT NULL auto_increment,
     identifier varchar(250) DEFAULT '' NOT NULL,
     expires int(11) unsigned DEFAULT '0' NOT NULL,

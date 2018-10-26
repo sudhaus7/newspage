@@ -5,7 +5,7 @@ if (!defined('TYPO3_MODE')) {
 return array(
 
     'ctrl' => array(
-        'title'             => 'LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:tx_sudhaus7newspage_domain_model_tag',
+        'title'             => 'LLL:EXT:newspage/Resources/Private/Language/locallang.xlf:tx_newspage_domain_model_tag',
         'label'             => 'title',
         'tstamp'            => 'tstamp',
         'crdate'            => 'crdate',
@@ -20,8 +20,8 @@ return array(
             'disabled' => 'hidden',
         ),
         'searchFields'      => 'title,',
-        'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('sudhaus7_newspage') . 'Configuration/TCA/tx_sudhaus7newspage_domain_model_tag.php',
-        'iconfile'          => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sudhaus7_newspage') . 'Resources/Public/Icons/tx_sudhaus7newspage_domain_model_tag.png'
+        'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('newspage') . 'Configuration/TCA/tx_newspage_domain_model_tag.php',
+        'iconfile'          => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('newspage') . 'Resources/Public/Icons/tx_newspage_domain_model_tag.png'
     ),
     'interface' => array(
         'showRecordFieldList' => 'hidden, title',
@@ -60,8 +60,8 @@ return array(
                 'items' => array(
                     array('', 0),
                 ),
-                'foreign_table' => 'tx_sudhaus7newspage_domain_model_tag',
-                'foreign_table_where' => 'AND tx_sudhaus7newspage_domain_model_tag.pid=###CURRENT_PID### AND tx_sudhaus7newspage_domain_model_tag.sys_language_uid IN (-1,0)',
+                'foreign_table' => 'tx_newspage_domain_model_tag',
+                'foreign_table_where' => 'AND tx_newspage_domain_model_tag.pid=###CURRENT_PID### AND tx_newspage_domain_model_tag.sys_language_uid IN (-1,0)',
             )
         ),
         'l10n_diffsource' => array(
@@ -85,14 +85,26 @@ return array(
         ),
         'title' => array(
             'exclude' => 0,
-            'label' => 'LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:tx_sudhaus7newspage_domain_model_tag.title',
+            'label' => 'LLL:EXT:newspage/Resources/Private/Language/locallang.xlf:tx_newspage_domain_model_tag.title',
             'config' => array(
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim'
             ),
         ),
-
+        'category' => array(
+            'exclude' => 0,
+            'l10n_mode' => 'exclude',
+            'label' => 'LLL:EXT:newspage/Resources/Private/Language/locallang.xlf:tx_newspage_domain_model_tag.category',
+            'config' => array(
+                'type' => 'select',
+                'renderType'=>'selectSingle',
+                'items' => array(
+                    array('LLL:EXT:newspage/Resources/Private/Language/locallang.xlf:tx_newspage_domain_model_tag.category.country', 'LLL:EXT:newspage/Resources/Private/Language/locallang.xlf:tx_newspage_domain_model_tag.category.country'),
+                    array('LLL:EXT:newspage/Resources/Private/Language/locallang.xlf:tx_newspage_domain_model_tag.category.topic', 'LLL:EXT:newspage/Resources/Private/Language/locallang.xlf:tx_newspage_domain_model_tag.category.topic'),
+                )
+            ),
+        ),
         'relation'=>array(
             'exclude' => 1,
             'l10n_mode' => 'exclude',
@@ -102,8 +114,8 @@ return array(
                 'internal_type' => 'db',
                 'foreign_table' => 'tt_content',
                 'allowed'       => 'tt_content',
-                'MM'            => 'tx_sudhaus7newspage_domain_tag_mm',
-                'MM_opposite_field' => 'tx_sudhaus7newspage_tag',
+                'MM'            => 'tx_newspage_domain_tag_mm',
+                'MM_opposite_field' => 'tx_newspage_tag',
                 'size'          => 10,
                 'maxitems'      => 99999,
             ),
@@ -112,11 +124,11 @@ return array(
         'parent_tag' => array(
             'exclude' => 1,
             'l10n_mode' => 'exclude',
-            'label' => 'LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:tx_sudhaus7newspage_domain_model_tag.parent_tag',
+            'label' => 'LLL:EXT:newspage/Resources/Private/Language/locallang.xlf:tx_newspage_domain_model_tag.parent_tag',
             'config' => array(
                 'type' => 'select',
-                'foreign_table' => 'tx_sudhaus7newspage_domain_model_tag',
-                'foreign_table_where' => 'and tx_sudhaus7newspage_domain_model_tag.sys_language_uid=0 ORDER BY tx_sudhaus7newspage_domain_model_tag.title ASC',
+                'foreign_table' => 'tx_newspage_domain_model_tag',
+                'foreign_table_where' => 'and tx_newspage_domain_model_tag.sys_language_uid=0 ORDER BY tx_newspage_domain_model_tag.title ASC',
                 'size' => 10,
                 'autoSizeMax' => 50,
                 'minitems' => 0,
@@ -132,5 +144,5 @@ return array(
                 )
             )
         ),
-    ),
+                        ),
 );

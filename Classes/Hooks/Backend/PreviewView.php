@@ -1,8 +1,8 @@
 <?php
 
-namespace SUDHAUS7\Sudhaus7Newspage\Hooks\Backend;
+namespace SUDHAUS7\Newspage\Hooks\Backend;
 
-use SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TtContentRepository;
+use SUDHAUS7\Newspage\Domain\Repository\TtContentRepository;
 
 class PreviewView implements \TYPO3\CMS\Backend\View\PageLayoutViewDrawItemHookInterface
 {
@@ -25,17 +25,17 @@ class PreviewView implements \TYPO3\CMS\Backend\View\PageLayoutViewDrawItemHookI
         array &$row
     ) {
         switch ($row['CType']) {
-            case 'sudhaus7newspage_element':
+            case 'newspage_element':
                 // sample
                 $drawItem = false;
 
-                if (empty($row['tx_sudhaus7newspage_from'])) {
+                if (empty($row['tx_newspage_from'])) {
                     $headerContent = '<strong>' . $row['header'] . '</strong><br/>';
                     $itemContent   = $row['bodytext'] . '<br/>';
                 } else {
                     $headerContent = '<strong>' . date(
                         'd. M Y',
-                            $row['tx_sudhaus7newspage_from']
+                            $row['tx_newspage_from']
                     ) . ' : ' . $row['header'] . '</strong><br/>';
                     $itemContent   = $row['bodytext'] . '<br/>';
                 }
@@ -50,9 +50,9 @@ class PreviewView implements \TYPO3\CMS\Backend\View\PageLayoutViewDrawItemHookI
 
                 break;
             case 'list':
-                if ($row['list_type'] == 'sudhaus7newspage_plugin') {
+                if ($row['list_type'] == 'newspage_plugin') {
                     $drawItem      = false;
-                    $headerContent = '<strong>' . $GLOBALS['LANG']->sL('LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:tt_content.sudhaus7newspage_plugin') . '</strong><br/>';
+                    $headerContent = '<strong>' . $GLOBALS['LANG']->sL('LLL:EXT:newspage/Resources/Private/Language/locallang.xlf:tt_content.newspage_plugin') . '</strong><br/>';
                     $headerContent .= '<strong>' . $row['header'] . '</strong><br/>';
 
                     list($headerContent, $itemContent) = $this->dispatchSignal(
@@ -77,7 +77,7 @@ class PreviewView implements \TYPO3\CMS\Backend\View\PageLayoutViewDrawItemHookI
      * @param string $signalName
      * @param string $headerContent
      * @param string $itemContent
-     * @param array|\SUDHAUS7\Sudhaus7Newspage\Domain\Model\TtContent $row
+     * @param array|\SUDHAUS7\Newspage\Domain\Model\TtContent $row
      * @param $pObj
      *
      * @return array
@@ -121,7 +121,7 @@ class PreviewView implements \TYPO3\CMS\Backend\View\PageLayoutViewDrawItemHookI
     ) {
         $extbaseObjectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
 
-        /** @var \SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TtContentRepository $yourRepository */
+        /** @var \SUDHAUS7\Newspage\Domain\Repository\TtContentRepository $yourRepository */
         $yourRepository = $extbaseObjectManager->get(TtContentRepository::class);
 
         $config = \TYPO3\CMS\Core\Utility\GeneralUtility::xml2array($row['pi_flexform']);
@@ -138,7 +138,7 @@ class PreviewView implements \TYPO3\CMS\Backend\View\PageLayoutViewDrawItemHookI
             $treelist = $yourRepository->getTreeList($settings['storagePid'], $settings['recursive']);
             $elements = $yourRepository->findNews($treelist, $settings);
 
-            /** @var \SUDHAUS7\Sudhaus7Newspage\Domain\Model\TtContent $element */
+            /** @var \SUDHAUS7\Newspage\Domain\Model\TtContent $element */
             foreach ($elements as $element) {
                 if (is_object($element->getTxSudhaus7newspageFrom())) {
                     $content = $element->getTxSudhaus7newspageFrom()

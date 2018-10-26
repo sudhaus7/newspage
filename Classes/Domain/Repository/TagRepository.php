@@ -1,12 +1,12 @@
 <?php
-namespace SUDHAUS7\Sudhaus7Newspage\Domain\Repository;
+namespace SUDHAUS7\Newspage\Domain\Repository;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class TagRepository
  *
- * @package SUDHAUS7\Sudhaus7Newspage\Domain\Repository
+ * @package SUDHAUS7\Newspage\Domain\Repository
  */
 class TagRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
@@ -37,7 +37,7 @@ class TagRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         return $query->execute();
     }
 
-    public function findRelated(\SUDHAUS7\Sudhaus7Newspage\Domain\Model\TtContent $o)
+    public function findRelated(\SUDHAUS7\Newspage\Domain\Model\TtContent $o)
     {
         /** @var \TYPO3\CMS\Extbase\Persistence\Generic\Query $query */
         $query = $this->createQuery();

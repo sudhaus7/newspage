@@ -1,11 +1,11 @@
 <?php
-namespace SUDHAUS7\Sudhaus7Newspage\Domain\Model;
+namespace SUDHAUS7\Newspage\Domain\Model;
 
 class TtContent extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
-     * @var \SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TagRepository
+     * @var \SUDHAUS7\Newspage\Domain\Repository\TagRepository
      * @inject
      */
     protected $contentRepository;
@@ -136,9 +136,9 @@ class TtContent extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $sorting;
 
     /**
-     * tx_sudhaus7newspage_tag
+     * tx_newspage_tag
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\SUDHAUS7\Sudhaus7Newspage\Domain\Model\Tag>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\SUDHAUS7\Newspage\Domain\Model\Tag>
      * @lazy
      */
     protected $txSudhaus7newspageTag;
@@ -149,13 +149,13 @@ class TtContent extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $pid;
     /**
-     * tx_sudhaus7newspage_from
+     * tx_newspage_from
      *
      * @var \DateTime
      */
     protected $txSudhaus7newspageFrom;
     /**
-     * tx_sudhaus7newspage_to
+     * tx_newspage_to
      *
      * @var \DateTime
      */
@@ -617,7 +617,7 @@ class TtContent extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the tag
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\SUDHAUS7\Sudhaus7Newspage\Domain\Model\Tag> $txSudhaus7newspageTag
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\SUDHAUS7\Newspage\Domain\Model\Tag> $txSudhaus7newspageTag
      * @lazy
      */
     public function getTxSudhaus7newspageTag()
@@ -628,7 +628,7 @@ class TtContent extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the relation
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\SUDHAUS7\Sudhaus7Newspage\Domain\Model\Tag> $txSudhaus7newspageTag
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\SUDHAUS7\Newspage\Domain\Model\Tag> $txSudhaus7newspageTag
      * @return void
      */
     public function setTxSudhaus7newspageTag(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $txSudhaus7newspageTag)
@@ -858,5 +858,33 @@ class TtContent extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setTxSudhaus7newspageShowimageindetail($txSudhaus7newspageShowimageindetail)
     {
         $this->txSudhaus7newspageShowimageindetail = $txSudhaus7newspageShowimageindetail;
+    }
+    
+    /**
+     * TxSudhaus7newspageLatlng
+     *
+     * @var \string
+     */
+    protected $txSudhaus7newspageLatlng;
+    
+    /**
+     * Returns the TxSudhaus7newspageLatlng
+     *
+     * @return \string $txSudhaus7newspageLatlng
+     */
+    public function getTxSudhaus7newspageLatlng()
+    {
+        return $this->txSudhaus7newspageLatlng;
+    }
+    
+    /**
+     * Sets the TxSudhaus7newspageLatlng
+     *
+     * @param \string $txSudhaus7newspageLatlng
+     * @return void
+     */
+    public function setTxSudhaus7newspageLatlng($txSudhaus7newspageLatlng)
+    {
+        $this->txSudhaus7newspageLatlng = $txSudhaus7newspageLatlng;
     }
 }

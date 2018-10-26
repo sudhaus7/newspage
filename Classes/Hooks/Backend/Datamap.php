@@ -6,11 +6,12 @@
  * Time: 16:04
  */
 
-namespace SUDHAUS7\Sudhaus7Newspage\Hooks\Backend;
+namespace SUDHAUS7\Newspage\Hooks\Backend;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Cache\CacheManager;
-use TYPO3\CMS\Core\Database\DatabaseConnection;
+use TYPO3\CMS\Core\Database\Connection;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Package\PackageManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -19,9 +20,7 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 class Datamap
 {
     /**
-     * Database layer. Identical to $GLOBALS['TYPO3_DB']
-     *
-     * @var DatabaseConnection
+     * @var Connection
      */
     protected $databaseConnection;
 
@@ -40,7 +39,8 @@ class Datamap
      */
     public function __construct()
     {
-        $this->databaseConnection = $GLOBALS['TYPO3_DB'];
+        $this->databaseConnection = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getConnectionForTable('tt_content');
         $this->cacheManager = GeneralUtility::makeInstance(CacheManager::class);
         $this->pm = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Package\\PackageManager');
     }
@@ -54,7 +54,7 @@ class Datamap
      */
     public function processDatamap_afterDatabaseOperations($status, $table, $id, &$fieldArray, DataHandler &$pObj)
     {
-        if ($status=='new' && $table=='tt_content' && $fieldArray['CType']=='sudhaus7newspage_element') {
+        if ($status=='new' && $table=='tt_content' && $fieldArray['CType']=='newspage_element') {
             $uid = $id;
             if ((int)$uid!==$id) {
                 $uid=$pObj->substNEWwithIDs[$id];
@@ -72,7 +72,7 @@ class Datamap
                         $rootid = $p['uid'];
                     }
                 }
-                $this->cacheManager->flushCachesByTag('sudhaus7newspage_element_root_'.$rootid);
+                $this->cacheManager->flushCachesByTag('newspage_element_root_'.$rootid);
             }
         }
     }
@@ -80,11 +80,7 @@ class Datamap
     public function processCmdmap($command, $table, $id, $value, $commandIsProcessed, DataHandler &$pObj, $pasteUpdate)
     {
         if ($command == 'move' && $table=='tt_content') {
-            $row = $this->databaseConnection->exec_SELECTgetSingleRow(
-                '*',
-                'tt_content',
-                'CType="sudhaus7newspage_element" and tx_sudhaus7newspage_type > 0 and uid=' . $id
-            );
+            $row = BackendUtility::getRecord('tt_content', $id);
             if (!empty($row)) {
                 if ($this->pm->isPackageAvailable('realurl')) {
                     $this->deleteRealurlCache($row['pid']);
@@ -97,12 +93,8 @@ class Datamap
     public function processCmdmap_postProcess($command, $table, $id, $value, DataHandler &$pObj, $pasteUpdate, $pasteDatamap)
     {
         if ($command=='delete' && $table=='tt_content') {
-            $row = $this->databaseConnection->exec_SELECTgetSingleRow(
-                '*',
-                'tt_content',
-                'CType="sudhaus7newspage_element" and tx_sudhaus7newspage_type > 0 and uid=' . $id
-            );
-            if (!empty($row)) {
+            $row = BackendUtility::getRecord($table, $id);
+            if (!empty($row) && $row['CType']=='newspage_element') {
                 if ($this->pm->isPackageAvailable('realurl')) {
                     $this->deleteRealurlCache($row['pid']);
                 }
@@ -110,7 +102,7 @@ class Datamap
             }
         }
         if ($command == 'delete' && $table == 'pages') {
-            $this->databaseConnection->exec_UPDATEquery('pages', 'content_from_pid='.$id, ['hidden' => 1]);
+            $this->databaseConnection->update($table, ['hidden' => 1], ['uid'=>$id]);
         }
         if (($command=='move' || $command=='undelete' || $command=='copy') && $table=='tt_content') {
             $dummy = [];
@@ -123,25 +115,21 @@ class Datamap
         if ($status == 'update') {
             if ($table == 'pages') {
                 if (isset($fieldArray['title'])) {
-                    $where = 'ctype="sudhaus7newspage_element" '.
-                        ' and tx_sudhaus7newspage_type in (1,2)  '.
-                        ' and tx_sudhaus7newspage_from > 0  '.
-                        ' and deleted=0  '.
-                        ' and sys_language_uid=0  '.
-                        ' and pid=' . $id;
-                    $row = $this->databaseConnection->exec_SELECTgetSingleRow(
-                        '*',
-                        'tt_content',
-                        $where,
-                        '',
-                        'hidden asc'
-                    );
+                    //Dies this page have newspage elements?
+                    $query = $this->databaseConnection->createQueryBuilder();
+                    $query->select(...['*'])->from('tt_content');
+                    $query->andWhere($query->expr()->eq('CType', 'newspage_element'));
+                    $query->andWhere($query->expr()->eq('deleted', 0));
+                    $query->andWhere($query->expr()->eq('pid', $id));
+                    $query->orderBy('hidden', 'ASC');
+                    $result = $query->execute();
+                    $row = $result->fetch(\PDO::FETCH_ASSOC);
                     if ($row) {
                         if ($this->pm->isPackageAvailable('realurl')) {
-                            if ($row['tx_sudhaus7newspage_showdate'] > 0) {
+                            if ($row['tx_newspage_showdate'] > 0) {
                                 $fieldArray['tx_realurl_pathsegment'] = date(
                                     'd-m-Y',
-                                        $row['tx_sudhaus7newspage_from']
+                                        $row['tx_newspage_from']
                                 ) . '-' . $this->generateslug($fieldArray['title']);
                             } else {
                                 $fieldArray['tx_realurl_pathsegment'] = '';
@@ -155,37 +143,29 @@ class Datamap
                     (isset($fieldArray['hidden']) && $fieldArray['hidden'] == 1) ||
                     (isset($fieldArray['deleted']) && $fieldArray['deleted'] == 1)
                 ) {
-                    $this->databaseConnection->exec_UPDATEquery(
-                        'pages',
-                        'content_from_pid='.$id,
-                        ['hidden' => 1]
-                    );
+                    $this->databaseConnection->update('pages', ['hidden' => 1], ['content_from_pid'=>$id]);
                 }
             }
             if ($table == 'pages_language_overlay') {
-                $pages_language_overlay = $this->databaseConnection->exec_SELECTgetSingleRow(
-                    '*',
-                    'pages_language_overlay',
-                    'uid='.$id
-                );
+                $pages_language_overlay = BackendUtility::getRecord('pages_language_overlay', $id);
+                
                 if (isset($fieldArray['title'])) {
-                    $where = 'ctype="sudhaus7newspage_element" and tx_sudhaus7newspage_type in (1,2) and '.
-                             ' tx_sudhaus7newspage_from > 0 and deleted=0 and sys_language_uid=0 and pid=' .
-                             $pages_language_overlay['pid'];
-                    $row = $this->databaseConnection->exec_SELECTgetSingleRow(
-                        '*',
-                        'tt_content',
-                        $where,
-                        '',
-                        'hidden asc'
-                    );
-
+                    $query = $this->databaseConnection->createQueryBuilder();
+                    $query->select(...['*'])->from('tt_content');
+                    $query->andWhere($query->expr()->eq('CType', 'newspage_element'));
+                    $query->andWhere($query->expr()->eq('deleted', 0));
+                    $query->andWhere($query->expr()->eq('pid', $pages_language_overlay['pid']));
+    
+                    $query->orderBy('hidden', 'ASC');
+                    $result = $query->execute();
+                    $row = $result->fetch(\PDO::FETCH_ASSOC);
+                    
                     if ($row) {
                         if ($this->pm->isPackageAvailable('realurl')) {
-                            if ($row['tx_sudhaus7newspage_showdate'] > 0) {
+                            if ($row['tx_newspage_showdate'] > 0) {
                                 $fieldArray['tx_realurl_pathsegment'] = date(
                                     'd-m-Y',
-                                        $row['tx_sudhaus7newspage_from']
+                                        $row['tx_newspage_from']
                                 ) . '-' . $this->generateslug($fieldArray['title']);
                             } else {
                                 $fieldArray['tx_realurl_pathsegment'] = '';
@@ -242,10 +222,10 @@ class Datamap
         } else {
             $aRet[] = $row['sys_language_uid'];
         }
-        if (isset($fieldArray['tx_sudhaus7newspage_from'])) {
-            $aRet[] = $fieldArray['tx_sudhaus7newspage_from'];
+        if (isset($fieldArray['tx_newspage_from'])) {
+            $aRet[] = $fieldArray['tx_newspage_from'];
         } else {
-            $aRet[] = $row['tx_sudhaus7newspage_from'];
+            $aRet[] = $row['tx_newspage_from'];
         }
         if (isset($fieldArray['pid'])) {
             $aRet[] = $fieldArray['pid'];
@@ -261,51 +241,36 @@ class Datamap
      */
     private function handleTTcontent($id, &$fieldArray)
     {
-        $row = $this->databaseConnection->exec_SELECTgetSingleRow(
-            '*',
-            'tt_content',
-            'CType="sudhaus7newspage_element" and tx_sudhaus7newspage_type > 0 and uid=' . $id
-        );
+        $row = BackendUtility::getRecord('tt_content', $id);
         if (!empty($row)) {
-            list($sys_language_uid, $tx_sudhaus7newspage_from, $pid) = $this->getMetaIfNotSet(
+            list($sys_language_uid, $tx_newspage_from, $pid) = $this->getMetaIfNotSet(
                 $row,
                 $fieldArray
             );
-            if ($tx_sudhaus7newspage_from > 0) {
+            if ($tx_newspage_from > 0) {
                 if ($row['sys_language_uid'] > 0) {
                     $pagetable = 'pages_language_overlay';
-                    $page = $this->databaseConnection->exec_SELECTgetSingleRow(
-                        '*',
-                        $pagetable,
-                        'pid=' . $pid . ' and sys_language_uid=' . $sys_language_uid
-                    );
+                    
+                    $page = $this->databaseConnection->select(['*'], $pagetable, ['pid'=>$pid,'sys_language_uid'=>$sys_language_uid])->fetch(\PDO::FETCH_ASSOC);
                 } else {
                     $pagetable = 'pages';
-                    $page = $this->databaseConnection->exec_SELECTgetSingleRow(
-                        '*',
-                        $pagetable,
-                        'uid=' . $pid
-                    );
+                    $page = $this->databaseConnection->select(['*'], $pagetable, ['uid'=>$pid])->fetch(\PDO::FETCH_ASSOC);
                 }
                 if ($page) {
                     if ($this->pm->isPackageAvailable('realurl')) {
                         $tx_realurl_pathsegment = '';
-                        $showdate = isset($fieldArray['tx_sudhaus7newspage_showdate'])
-                            ? $fieldArray['tx_sudhaus7newspage_showdate']
-                            : $row['tx_sudhaus7newspage_showdate'];
+                        $showdate = isset($fieldArray['tx_newspage_showdate'])
+                            ? $fieldArray['tx_newspage_showdate']
+                            : $row['tx_newspage_showdate'];
                         if ($showdate > 0) {
                             $tx_realurl_pathsegment = date(
                                 'd-m-Y',
-                                    isset($fieldArray['tx_sudhaus7newspage_from'])
-                                        ? $fieldArray['tx_sudhaus7newspage_from']
-                                        : $row['tx_sudhaus7newspage_from']
+                                    isset($fieldArray['tx_newspage_from'])
+                                        ? $fieldArray['tx_newspage_from']
+                                        : $row['tx_newspage_from']
                             ) . '-' . $this->generateslug($page['title']);
                         }
-                        $this->databaseConnection->exec_UPDATEquery(
-                            $pagetable,
-                            'uid=' . $page['uid'],
-                            ['tx_realurl_pathsegment' => $tx_realurl_pathsegment]
-                        );
+                        $this->databaseConnection->update($pagetable, ['tx_realurl_pathsegment' => $tx_realurl_pathsegment], ['uid'=>$page['uid']]);
                         $this->deleteRealurlCache($pid);
                     }
                     $this->cacheManager->flushCachesByTag('pageId_' . $pid);
@@ -313,9 +278,10 @@ class Datamap
             }
         }
     }
-
+    
     /**
      * @param $pid
+     * @throws \TYPO3\CMS\Core\Package\Exception\UnknownPackageException
      */
     private function deleteRealurlCache($pid)
     {
@@ -325,15 +291,9 @@ class Datamap
             explode('.', $realurl_version)[0] < 2 ||
             (explode('.', $realurl_version)[0] == 2 && explode('.', $realurl_version)[1] == 0)
         ) {
-            $this->databaseConnection->exec_DELETEquery(
-                'tx_realurl_pathcache',
-                'page_id=' . $pid
-            );
+            $this->databaseConnection->delete('tx_realurl_pathcache', ['page_id',$pid]);
         } else {
-            $this->databaseConnection->exec_DELETEquery(
-                'tx_realurl_pathdata',
-                'page_id=' . $pid
-            );
+            $this->databaseConnection->delete('tx_realurl_pathdata', ['page_id',$pid]);
         }
     }
 }

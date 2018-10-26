@@ -3,15 +3,15 @@ if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
 if (TYPO3_MODE == 'BE') {
-    $languageFilePrefix = 'LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:';
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] = 'SUDHAUS7\\Sudhaus7Newspage\\Hooks\\Backend\\Datamap';
+    $languageFilePrefix = 'LLL:EXT:newspage/Resources/Private/Language/locallang.xlf:';
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] = 'SUDHAUS7\\Newspage\\Hooks\\Backend\\Datamap';
     
     
     
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processCmdmapClass'][] = 'SUDHAUS7\\Sudhaus7Newspage\\Hooks\\Backend\\Datamap';
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processCmdmapClass'][] = 'SUDHAUS7\\Newspage\\Hooks\\Backend\\Datamap';
 
 
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals'][\SUDHAUS7\Sudhaus7Newspage\Hooks\Backend\BackendEvaluator::class] = '';
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals'][\SUDHAUS7\Newspage\Hooks\Backend\BackendEvaluator::class] = '';
 
     $extensionName = strtolower(\TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToUpperCamelCase($_EXTKEY));
 
@@ -60,7 +60,7 @@ if (TYPO3_MODE == 'BE') {
 call_user_func(
     function ($extKey) {
         $confArr =
-            unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['sudhaus7_newspage']);
+            unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['newspage']);
         if ($confArr['newspagetype']) {
             $newsPageDoktype = 101;
             $GLOBALS['PAGES_TYPES'][$newsPageDoktype] = [
@@ -73,7 +73,7 @@ call_user_func(
                     'content-news',
                     TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class,
                     [
-                        'source' => 'EXT:' . $extKey . '/Resources/Public/Icons/tx_sudhaus7newspage_domain_model_tag.png',
+                        'source' => 'EXT:' . $extKey . '/Resources/Public/Icons/tx_newspage_domain_model_tag.png',
                     ]
                 );
 
@@ -83,12 +83,12 @@ call_user_func(
             );
         }
     },
-    'sudhaus7_newspage'
+    'newspage'
 );
 
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
-TCEFORM.tt_content.tx_sudhaus7newspage_showimageindetail.disabled = 1
+TCEFORM.tt_content.tx_newspage_showimageindetail.disabled = 1
 ');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/Typoscript', 'Sudhaus7 NewsPage Templates');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sudhaus7newspage_domain_model_tag');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_newspage_domain_model_tag');
