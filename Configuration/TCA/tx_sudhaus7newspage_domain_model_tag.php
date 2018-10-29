@@ -20,8 +20,7 @@ return array(
             'disabled' => 'hidden',
         ),
         'searchFields'      => 'title,',
-        'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('sudhaus7newspage') . 'Configuration/TCA/tx_sudhaus7newspage_domain_model_tag.php',
-        'iconfile'          => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sudhaus7newspage') . 'Resources/Public/Icons/tx_sudhaus7newspage_domain_model_tag.png'
+        'iconfile'          => 'EXT:sudhaus7_newspage/Resources/Public/Icons/tx_sudhaus7newspage_domain_model_tag.png',
     ),
     'interface' => array(
         'showRecordFieldList' => 'hidden, title',

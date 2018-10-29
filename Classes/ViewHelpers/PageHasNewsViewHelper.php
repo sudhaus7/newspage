@@ -17,7 +17,7 @@ class PageHasNewsViewHelper extends AbstractConditionViewHelper
 {
     public function initializeArguments()
     {
-        $this->registerArgument('content','mixed','The content Element to check',false);
+        $this->registerArgument('content', 'mixed', 'The content Element to check', false);
         $this->registerArgument('page', 'mixed', 'The page to check for', false);
     }
 
@@ -31,7 +31,7 @@ class PageHasNewsViewHelper extends AbstractConditionViewHelper
         $contentConnector = $dbConnection->getQueryBuilderForTable('tt_content');
         $hasNews = false;
         if (empty($arguments['content']) && empty($arguments['page'])) {
-            throw new \InvalidArgumentException('Neither content nor page is set in '.self::class,1540542726);
+            throw new \InvalidArgumentException('Neither content nor page is set in '.self::class, 1540542726);
         }
 
         if (

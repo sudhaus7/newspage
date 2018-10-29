@@ -3,6 +3,7 @@ namespace SUDHAUS7\Sudhaus7Newspage\Controller;
 
 use SUDHAUS7\Sudhaus7Base\Tools\Globals;
 use SUDHAUS7\Sudhaus7Newspage\Domain\Model\TtContent;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use \TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
@@ -16,12 +17,19 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 {
     
     /**
+     *
+     * @var ConnectionPool
+     */
+    protected $databaseConnection;
+    
+    /**
      * @var \SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TtContentRepository
+     *
      */
     protected $content;
     
     /**
-     * @param TtContentRepository $ttContentRepository
+     * @param \SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TtContentRepository $ttContentRepository
      */
     public function injectTtContentRepository(\SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TtContentRepository $ttContentRepository)
     {
@@ -30,7 +38,7 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
     /**
      * @var \SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TagRepository
-     * @inject
+     *
      */
     protected $tags;
     
@@ -55,6 +63,7 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     {
         parent::__construct();
         $this->pageCache = GeneralUtility::makeInstance(CacheManager::class)->getCache('sudhaus7newspage_pagecache');
+        $this->databaseConnection = GeneralUtility::makeInstance(ConnectionPool::class);
     }
 
     /**
@@ -128,7 +137,7 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             : 'pageId_' . $GLOBALS['TSFE']->id . '_' .
               $GLOBALS['TSFE']->sys_language_uid . '_' .
               $this->configurationManager->getContentObject()->data['uid'];
-
+        
         if ($this->pageCache && $a = $this->pageCache->get($cacheKey)) {
             return $a;
         }
@@ -154,14 +163,15 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         
         
         if ($GLOBALS['TSFE']->sys_language_uid === 0) {
-            $res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-                'distinct pid',
-                'tt_content',
-                'ctype="sudhaus7newspage_element" '.
+            $res = $this->databaseConnection->getQueryBuilderForTable('tt_content')
+                ->select('pid')
+                ->from('tt_content')
+                ->where('ctype="sudhaus7newspage_element" '.
                     'and pid in ('.implode(',', $list).') '.
                     'and sys_language_uid= '.$GLOBALS['TSFE']->sys_language_uid.
-                $this->configurationManager->getContentObject()->enableFields('tt_content')
-            );
+                    $this->configurationManager->getContentObject()->enableFields('tt_content'))
+                ->groupBy('pid')
+                ->execute();
         } else {
             $enablefields = $this->configurationManager->getContentObject()->enableFields('tt_content');
             $enablefields2 = str_replace('tt_content', 'tt2', $enablefields);
@@ -185,16 +195,18 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
         $result = array();
         $clear_array_keys = array('sudhaus7newspage_element_root_'.$rootid,'pageId_' . $GLOBALS['TSFE']->id);
-        while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_row($res)) {
+        while ($row = $res->fetchAll()) {
             $result[]=$row[0];
             $clear_array_keys[] = 'pageId_'.$row[0];
         }
-        $newsPageTypes = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows(
-            '*',
-            'pages',
-            'doktype=101 and uid in ('. implode(',', $list).') '.
-            $this->configurationManager->getContentObject()->enableFields('pages')
-        );
+        $newsPageTypes = $this->databaseConnection->getQueryBuilderForTable('pages')
+            ->select('*')
+            ->from('pages')
+            ->where('doktype=101 and uid in ('. implode(',', $list).') '.
+                $this->configurationManager->getContentObject()->enableFields('pages'))
+            ->execute()
+            ->fetchAll();
+
         $linkMapper = [];
         foreach ($newsPageTypes as $page) {
             $result[] = $page['content_from_pid'];
@@ -235,6 +247,16 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             array_splice($news, 0, $this->settings['ignore']);
             return $news;
         }
+    }
+
+    public function injectContent(\SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TtContentRepository $content)
+    {
+        $this->content = $content;
+    }
+
+    public function injectTags(\SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TagRepository $tags)
+    {
+        $this->tags = $tags;
     }
 
     private function replaceEmptyShorts($news)
@@ -379,6 +401,7 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     }
     
     /**
+     * @return string
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException

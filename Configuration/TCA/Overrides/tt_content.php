@@ -1,21 +1,22 @@
 <?php
 call_user_func(function () {
     global $TCA;
-    $_EXTKEY = 'sudhaus7newspage';
-    $languageFilePrefix = 'LLL:EXT:'.$_EXTKEY.'/Resources/Private/Language/locallang.xlf:';
+    $extKey = 'sudhaus7_newspage';
+    
+    $languageFilePrefix = 'LLL:EXT:'.$extKey.'/Resources/Private/Language/locallang.xlf:';
     $frontendLanguageFilePrefix = 'LLL:EXT:'.'frontend/Resources/Private/Language/locallang_ttc.xlf:';
 
-    $confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['sudhaus7newspage']);
+    $confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['sudhaus7_newspage']);
     if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('sudhaus7_geomap')) {
-        $confArr['sudhaus7newspagelatlngsupport']  = isset($confArr['sudhaus7newspagelatlngsupport']) ? $confArr['sudhaus7newspagelatlngsupport'] : false;
-        $confArr['sudhaus7newspagelatlngactivate'] = isset($confArr['sudhaus7newspagelatlngactivate']) ? \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(
+        $confArr['newspagelatlngsupport']  = isset($confArr['newspagelatlngsupport']) ? $confArr['newspagelatlngsupport'] : false;
+        $confArr['newspagelatlngactivate'] = isset($confArr['newspagelatlngactivate']) ? \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(
             ',',
-            $confArr['sudhaus7newspagelatlngactivate'],
+            $confArr['newspagelatlngactivate'],
             true
         ) : [];
     } else {
-        $confArr['sudhaus7newspagelatlngsupport']  = false;
-        $confArr['sudhaus7newspagelatlngactivate'] = [];
+        $confArr['newspagelatlngsupport']  = false;
+        $confArr['newspagelatlngactivate'] = [];
     }
 
     $TCA['tt_content']['ctrl']['requestUpdate'] .= ',tx_sudhaus7newspage_type';
@@ -187,9 +188,9 @@ call_user_func(function () {
             ),
             */
 
-    if (!empty($confArr['sudhaus7newspagelatlngactivate'])) {
+    if (!empty($confArr['newspagelatlngactivate'])) {
         $tempColumns['tx_sudhaus7newspage_latlng']['displayCond'] = ['OR'=>[]];
-        foreach ($confArr['sudhaus7newspagelatlngactivate'] as $v) {
+        foreach ($confArr['newspagelatlngactivate'] as $v) {
             array_push($tempColumns['tx_sudhaus7newspage_latlng']['displayCond']['OR'], sprintf('FIELD:tx_sudhaus7newspage_type:=:%d', $v));
         }
         
@@ -226,13 +227,13 @@ call_user_func(function () {
 
     $TCA['tt_content']['palettes'][$extKey.'_datetime']['showitem'] = 'tx_sudhaus7newspage_from,tx_sudhaus7newspage_to,tx_sudhaus7newspage_showdate,tx_sudhaus7newspage_highlight';
 
-    //$tx_sudhaus7newspage_latlng = $confArr['sudhaus7newspagelatlngsupport']?'tx_sudhaus7newspage_latlng,':'';
+    //$tx_sudhaus7newspage_latlng = $confArr['newspagelatlngsupport']?'tx_sudhaus7newspage_latlng,':'';
 
     $GLOBALS['TCA']['tt_content']['types'][$pluginSignature] = [
         'showitem' => '
 				--palette--;' . $frontendLanguageFilePrefix . 'palette.general;general,tx_sudhaus7newspage_type,
 				--palette--;' . $frontendLanguageFilePrefix . 'palette.headers;headers,tx_sudhaus7newspage_place,tx_sudhaus7newspage_who,rowDescription,
-				--palette--;;'.$extKey.'_datetime,'.($confArr['sudhaus7newspagelatlngsupport']?'tx_sudhaus7newspage_latlng,':'').'tx_sudhaus7newspage_tag,
+				--palette--;;'.$extKey.'_datetime,'.($confArr['newspagelatlngsupport']?'tx_sudhaus7newspage_latlng,':'').'tx_sudhaus7newspage_tag,
 				bodytext;' . $languageFilePrefix . 'bodytext_formlabel,image,tx_sudhaus7newspage_showimageindetail,
 			--div--;' . $frontendLanguageFilePrefix . 'tabs.appearance,
 				layout;' . $frontendLanguageFilePrefix . 'layout_formlabel,
@@ -247,9 +248,9 @@ call_user_func(function () {
 		'
     ];
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
-    TCEFORM.tt_content.imagewidth.types.newspage_element.disabled = 1
-    TCEFORM.tt_content.imageheight.types.newspage_element.disabled = 1
-    TCEFORM.tt_content.imageborder.types.newspage_element.disabled = 1
+    TCEFORM.tt_content.imagewidth.types.sudhaus7newspage_element.disabled = 1
+    TCEFORM.tt_content.imageheight.types.sudhaus7newspage_element.disabled = 1
+    TCEFORM.tt_content.imageborder.types.sudhaus7newspage_element.disabled = 1
     ');
     $pluginSignature = $extensionName . '_plugin' ;
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin('SUDHAUS7.'.$extKey, 'Plugin', $languageFilePrefix.'tt_content.'.$pluginSignature);

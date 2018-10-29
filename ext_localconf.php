@@ -35,4 +35,3 @@ $iconRegistry->registerIcon(
     \TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class,
     ['source' => 'EXT:sudhaus7_newspage/Resources/Public/Icons/newspage.gif']
 );
-

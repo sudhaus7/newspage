@@ -52,7 +52,7 @@ class PreviewView implements \TYPO3\CMS\Backend\View\PageLayoutViewDrawItemHookI
             case 'list':
                 if ($row['list_type'] == 'sudhaus7newspage_plugin') {
                     $drawItem      = false;
-                    $headerContent = '<strong>' . $GLOBALS['LANG']->sL('LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:tt_content.newspage_plugin') . '</strong><br/>';
+                    $headerContent = '<strong>' . $GLOBALS['LANG']->sL('LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:tt_content.sudhaus7newspage_plugin') . '</strong><br/>';
                     $headerContent .= '<strong>' . $row['header'] . '</strong><br/>';
 
                     list($headerContent, $itemContent) = $this->dispatchSignal(
