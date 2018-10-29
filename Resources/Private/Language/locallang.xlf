@@ -124,13 +124,13 @@
 			</trans-unit>
 
 
-			<trans-unit id="tx_newspage_domain_model_tag" xml:space="preserve">
+			<trans-unit id="tx_sudhaus7newspage_domain_model_tag" xml:space="preserve">
 				<source>Newspage Tag</source>
 			</trans-unit>
-			<trans-unit id="tx_newspage_domain_model_tag.title" xml:space="preserve">
+			<trans-unit id="tx_sudhaus7newspage_domain_model_tag.title" xml:space="preserve">
 				<source>Tag Label</source>
 			</trans-unit>
-			<trans-unit id="tx_newspage_domain_model_tag.parent_tag" xml:space="preserve">
+			<trans-unit id="tx_sudhaus7newspage_domain_model_tag.parent_tag" xml:space="preserve">
 				<source>Parent Tag</source>
 			</trans-unit>
 

@@ -6,7 +6,7 @@
  * Time: 18:17
  */
 
-namespace SUDHAUS7\Newspage\Hooks\Backend;
+namespace SUDHAUS7\Sudhaus7Newspage\Hooks\Backend;
 
 class BackendEvaluator
 {

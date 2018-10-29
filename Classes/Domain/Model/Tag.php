@@ -1,17 +1,17 @@
 <?php
-namespace SUDHAUS7\Newspage\Domain\Model;
+namespace SUDHAUS7\Sudhaus7Newspage\Domain\Model;
 
 /**
  * Class Tag
  *
- * @package SUDHAUS7\Newspage\Domain\Model
+ * @package SUDHAUS7\Sudhaus7Newspage\Domain\Model
  */
 class Tag extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
 
     /**
-     * @var \SUDHAUS7\Newspage\Domain\Repository\TtContentRepository
+     * @var \SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TtContentRepository
      * @inject
      */
     protected $contentRepository;
@@ -79,7 +79,7 @@ class Tag extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Relation
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\SUDHAUS7\Newspage\Domain\Model\TtContent> $relation
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\SUDHAUS7\Sudhaus7Newspage\Domain\Model\TtContent> $relation
      * @lazy
      */
     protected $relation;
@@ -88,7 +88,7 @@ class Tag extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the relation
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\SUDHAUS7\Newspage\Domain\Model\TtContent> $relation
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\SUDHAUS7\Sudhaus7Newspage\Domain\Model\TtContent> $relation
      */
     public function getRelation()
     {
@@ -105,7 +105,7 @@ class Tag extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the relation
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\SUDHAUS7\Newspage\Domain\Model\TtContent> $relation
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\SUDHAUS7\Sudhaus7Newspage\Domain\Model\TtContent> $relation
      * @return void
      */
     public function setRelation(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $relation)

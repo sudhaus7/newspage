@@ -1,12 +1,12 @@
 CREATE TABLE tt_content (
-  tx_newspage_from  int(11) unsigned NOT NULL DEFAULT '0',
-  tx_newspage_tag  int(5) unsigned NOT NULL DEFAULT '0',
-  tx_newspage_showdate  int(1) unsigned NOT NULL DEFAULT '0',
-  tx_newspage_showtime  int(1) unsigned NOT NULL DEFAULT '0',
-  tx_newspage_highlight  int(1) unsigned NOT NULL DEFAULT '0'
+  tx_sudhaus7newspage_from  int(11) unsigned NOT NULL DEFAULT '0',
+  tx_sudhaus7newspage_tag  int(5) unsigned NOT NULL DEFAULT '0',
+  tx_sudhaus7newspage_showdate  int(1) unsigned NOT NULL DEFAULT '0',
+  tx_sudhaus7newspage_showtime  int(1) unsigned NOT NULL DEFAULT '0',
+  tx_sudhaus7newspage_highlight  int(1) unsigned NOT NULL DEFAULT '0'
 );
 
-CREATE TABLE tx_newspage_domain_model_tag (
+CREATE TABLE tx_sudhaus7newspage_domain_model_tag (
   uid int(11) NOT NULL auto_increment,
   pid int(11) NOT NULL DEFAULT '0',
   tstamp int(11) unsigned NOT NULL DEFAULT '0',
@@ -30,7 +30,7 @@ CREATE TABLE tx_newspage_domain_model_tag (
   KEY language (l10n_parent,sys_language_uid)
 );
 
-CREATE TABLE tx_newspage_domain_tag_mm (
+CREATE TABLE tx_sudhaus7newspage_domain_tag_mm (
   uid_local int(10) unsigned NOT NULL DEFAULT '0',
   uid_foreign int(10) unsigned NOT NULL DEFAULT '0',
   sorting int(10) unsigned NOT NULL DEFAULT '0',

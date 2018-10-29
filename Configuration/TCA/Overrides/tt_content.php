@@ -1,27 +1,27 @@
 <?php
 call_user_func(function () {
     global $TCA;
-    $_EXTKEY = 'newspage';
+    $_EXTKEY = 'sudhaus7newspage';
     $languageFilePrefix = 'LLL:EXT:'.$_EXTKEY.'/Resources/Private/Language/locallang.xlf:';
     $frontendLanguageFilePrefix = 'LLL:EXT:'.'frontend/Resources/Private/Language/locallang_ttc.xlf:';
 
-    $confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['newspage']);
+    $confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['sudhaus7newspage']);
     if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('sudhaus7_geomap')) {
-        $confArr['newspagelatlngsupport']  = isset($confArr['newspagelatlngsupport']) ? $confArr['newspagelatlngsupport'] : false;
-        $confArr['newspagelatlngactivate'] = isset($confArr['newspagelatlngactivate']) ? \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(
+        $confArr['sudhaus7newspagelatlngsupport']  = isset($confArr['sudhaus7newspagelatlngsupport']) ? $confArr['sudhaus7newspagelatlngsupport'] : false;
+        $confArr['sudhaus7newspagelatlngactivate'] = isset($confArr['sudhaus7newspagelatlngactivate']) ? \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(
             ',',
-            $confArr['newspagelatlngactivate'],
+            $confArr['sudhaus7newspagelatlngactivate'],
             true
         ) : [];
     } else {
-        $confArr['newspagelatlngsupport']  = false;
-        $confArr['newspagelatlngactivate'] = [];
+        $confArr['sudhaus7newspagelatlngsupport']  = false;
+        $confArr['sudhaus7newspagelatlngactivate'] = [];
     }
 
-    $TCA['tt_content']['ctrl']['requestUpdate'] .= ',tx_newspage_type';
+    $TCA['tt_content']['ctrl']['requestUpdate'] .= ',tx_sudhaus7newspage_type';
     $tempColumns = array(
 
-        'tx_newspage_type'=>array(
+        'tx_sudhaus7newspage_type'=>array(
 
             'exclude'=>0,
             'label'=>$languageFilePrefix.'element.flex.type',
@@ -38,7 +38,7 @@ call_user_func(function () {
             )
         ),
 
-        'tx_newspage_showimageindetail'=>array(
+        'tx_sudhaus7newspage_showimageindetail'=>array(
             //    'l10n_mode'=>'exclude',
             'exclude'=>0,
             'label'=>$languageFilePrefix.'element.flex.showimageindetail',
@@ -47,13 +47,13 @@ call_user_func(function () {
                 'default'=>1,
             )
         ),
-        'tx_newspage_showdate'=>array(
+        'tx_sudhaus7newspage_showdate'=>array(
             //    'l10n_mode'=>'exclude',
 
             'displayCond' => array(
                 'OR'=> array(
-                    'FIELD:tx_newspage_type:=:1',
-                    'FIELD:tx_newspage_type:=:2',
+                    'FIELD:tx_sudhaus7newspage_type:=:1',
+                    'FIELD:tx_sudhaus7newspage_type:=:2',
                 ),
             ),
             'exclude'=>1,
@@ -63,8 +63,8 @@ call_user_func(function () {
 
             )
         ),
-        'tx_newspage_showtime'=>array(
-            'displayCond' => 'FIELD:tx_newspage_type:=:2',
+        'tx_sudhaus7newspage_showtime'=>array(
+            'displayCond' => 'FIELD:tx_sudhaus7newspage_type:=:2',
             'l10n_mode'=>'exclude',
 
             'exclude'=>0,
@@ -74,8 +74,8 @@ call_user_func(function () {
 
             )
         ),
-        'tx_newspage_highlight'=>array(
-            'displayCond' => 'FIELD:tx_newspage_type:>:0',
+        'tx_sudhaus7newspage_highlight'=>array(
+            'displayCond' => 'FIELD:tx_sudhaus7newspage_type:>:0',
             'exclude'=>0,
             'label'=>$languageFilePrefix.'element.flex.highlight',
             'config'=>array(
@@ -83,11 +83,11 @@ call_user_func(function () {
 
             )
         ),
-        'tx_newspage_from'=>array(
+        'tx_sudhaus7newspage_from'=>array(
             'displayCond' => array(
                 'OR'=> array(
-                    'FIELD:tx_newspage_type:=:1',
-                    'FIELD:tx_newspage_type:=:2',
+                    'FIELD:tx_sudhaus7newspage_type:=:1',
+                    'FIELD:tx_sudhaus7newspage_type:=:2',
                 ),
             ),
             'exclude'=>0,
@@ -95,12 +95,12 @@ call_user_func(function () {
             'config'=>array(
                 'type' => 'input',
                 'size' => 30,
-                'eval'=>'datetime,required,'.\SUDHAUS7\Newspage\Hooks\Backend\BackendEvaluator::class,
+                'eval'=>'datetime,required,'.\SUDHAUS7\Sudhaus7Newspage\Hooks\Backend\BackendEvaluator::class,
             )
         ),
-        'tx_newspage_to'=>array(
+        'tx_sudhaus7newspage_to'=>array(
 
-            'displayCond' => 'FIELD:tx_newspage_type:=:2',
+            'displayCond' => 'FIELD:tx_sudhaus7newspage_type:=:2',
             'exclude'=>0,
             'label'=>$languageFilePrefix.'element.flex.news.to',
             'config'=>array(
@@ -109,7 +109,7 @@ call_user_func(function () {
                 'eval'=>'datetime',
             )
         ),
-        'tx_newspage_tag'=>array(
+        'tx_sudhaus7newspage_tag'=>array(
             'label'=>$languageFilePrefix.'element.flex.news.tags',
             'config'=>array(
                 'type'=>'select',
@@ -121,19 +121,19 @@ call_user_func(function () {
                         //'nonSelectableLevels'=>'0,1',
                     ),
                 ),
-                'foreign_table'=>'tx_newspage_domain_model_tag',
-                'foreign_table_where'=>'AND tx_newspage_domain_model_tag.sys_language_uid=0 ORDER  by tx_newspage_domain_model_tag.title asc',
-                'MM'=>'tx_newspage_domain_tag_mm',
+                'foreign_table'=>'tx_sudhaus7newspage_domain_model_tag',
+                'foreign_table_where'=>'AND tx_sudhaus7newspage_domain_model_tag.sys_language_uid=0 ORDER  by tx_sudhaus7newspage_domain_model_tag.title asc',
+                'MM'=>'tx_sudhaus7newspage_domain_tag_mm',
                 'size'=>10,
                 'maxitems'=>999,
             )
         ),
-        'tx_newspage_latlng'=>array(
+        'tx_sudhaus7newspage_latlng'=>array(
             /*
             'displayCond' => array(
                 'OR'=> array(
-                    'FIELD:tx_newspage_type:=:1',
-                    'FIELD:tx_newspage_type:=:3',
+                    'FIELD:tx_sudhaus7newspage_type:=:1',
+                    'FIELD:tx_sudhaus7newspage_type:=:3',
                 ),
             ),
             */
@@ -158,8 +158,8 @@ call_user_func(function () {
                 ),
             )
         ),
-        'tx_newspage_who'=>array(
-            'displayCond' => 'FIELD:tx_newspage_type:=:2',
+        'tx_sudhaus7newspage_who'=>array(
+            'displayCond' => 'FIELD:tx_sudhaus7newspage_type:=:2',
             'exclude' => 1,
             'label'=>$languageFilePrefix.'element.flex.who',
             'config'=>array(
@@ -167,8 +167,8 @@ call_user_func(function () {
                 'size' => 30,
             )
         ),
-        'tx_newspage_place'=>array(
-            'displayCond' => 'FIELD:tx_newspage_type:=:2',
+        'tx_sudhaus7newspage_place'=>array(
+            'displayCond' => 'FIELD:tx_sudhaus7newspage_type:=:2',
             'exclude' => 1,
             'label'=>$languageFilePrefix.'element.flex.place',
             'config'=>array(
@@ -181,26 +181,26 @@ call_user_func(function () {
     /*
             'displayCond' => array(
                 'OR'=> array(
-                    'FIELD:tx_newspage_type:=:1',
-                    'FIELD:tx_newspage_type:=:3',
+                    'FIELD:tx_sudhaus7newspage_type:=:1',
+                    'FIELD:tx_sudhaus7newspage_type:=:3',
                 ),
             ),
             */
 
-    if (!empty($confArr['newspagelatlngactivate'])) {
-        $tempColumns['tx_newspage_latlng']['displayCond'] = ['OR'=>[]];
-        foreach ($confArr['newspagelatlngactivate'] as $v) {
-            array_push($tempColumns['tx_newspage_latlng']['displayCond']['OR'], sprintf('FIELD:tx_newspage_type:=:%d', $v));
+    if (!empty($confArr['sudhaus7newspagelatlngactivate'])) {
+        $tempColumns['tx_sudhaus7newspage_latlng']['displayCond'] = ['OR'=>[]];
+        foreach ($confArr['sudhaus7newspagelatlngactivate'] as $v) {
+            array_push($tempColumns['tx_sudhaus7newspage_latlng']['displayCond']['OR'], sprintf('FIELD:tx_sudhaus7newspage_type:=:%d', $v));
         }
         
         // if there is just one entry, add a dummy entry for the OR condition to work
-        if (sizeof($tempColumns['tx_newspage_latlng']['displayCond']['OR']) == 1) {
-            array_push($tempColumns['tx_newspage_latlng']['displayCond']['OR'], sprintf('FIELD:tx_newspage_type:=:%d', 99999));
+        if (sizeof($tempColumns['tx_sudhaus7newspage_latlng']['displayCond']['OR']) == 1) {
+            array_push($tempColumns['tx_sudhaus7newspage_latlng']['displayCond']['OR'], sprintf('FIELD:tx_sudhaus7newspage_type:=:%d', 99999));
         }
         
         // if no items have been added, delete the setting
-        if (empty($tempColumns['tx_newspage_latlng']['displayCond']['OR'])) {
-            unset($tempColumns['tx_newspage_latlng']['displayCond']);
+        if (empty($tempColumns['tx_sudhaus7newspage_latlng']['displayCond']['OR'])) {
+            unset($tempColumns['tx_sudhaus7newspage_latlng']['displayCond']);
         }
     }
 
@@ -224,16 +224,16 @@ call_user_func(function () {
     $GLOBALS['TCA']['tt_content']['ctrl']['typeicon_classes'][$pluginSignature] = 'mimetypes-x-content-text';
 
 
-    $TCA['tt_content']['palettes'][$extKey.'_datetime']['showitem'] = 'tx_newspage_from,tx_newspage_to,tx_newspage_showdate,tx_newspage_highlight';
+    $TCA['tt_content']['palettes'][$extKey.'_datetime']['showitem'] = 'tx_sudhaus7newspage_from,tx_sudhaus7newspage_to,tx_sudhaus7newspage_showdate,tx_sudhaus7newspage_highlight';
 
-    //$tx_newspage_latlng = $confArr['newspagelatlngsupport']?'tx_newspage_latlng,':'';
+    //$tx_sudhaus7newspage_latlng = $confArr['sudhaus7newspagelatlngsupport']?'tx_sudhaus7newspage_latlng,':'';
 
     $GLOBALS['TCA']['tt_content']['types'][$pluginSignature] = [
         'showitem' => '
-				--palette--;' . $frontendLanguageFilePrefix . 'palette.general;general,tx_newspage_type,
-				--palette--;' . $frontendLanguageFilePrefix . 'palette.headers;headers,tx_newspage_place,tx_newspage_who,rowDescription,
-				--palette--;;'.$extKey.'_datetime,'.($confArr['newspagelatlngsupport']?'tx_newspage_latlng,':'').'tx_newspage_tag,
-				bodytext;' . $languageFilePrefix . 'bodytext_formlabel,image,tx_newspage_showimageindetail,
+				--palette--;' . $frontendLanguageFilePrefix . 'palette.general;general,tx_sudhaus7newspage_type,
+				--palette--;' . $frontendLanguageFilePrefix . 'palette.headers;headers,tx_sudhaus7newspage_place,tx_sudhaus7newspage_who,rowDescription,
+				--palette--;;'.$extKey.'_datetime,'.($confArr['sudhaus7newspagelatlngsupport']?'tx_sudhaus7newspage_latlng,':'').'tx_sudhaus7newspage_tag,
+				bodytext;' . $languageFilePrefix . 'bodytext_formlabel,image,tx_sudhaus7newspage_showimageindetail,
 			--div--;' . $frontendLanguageFilePrefix . 'tabs.appearance,
 				layout;' . $frontendLanguageFilePrefix . 'layout_formlabel,
 				--palette--;' . $frontendLanguageFilePrefix . 'palette.appearanceLinks;appearanceLinks,
@@ -262,8 +262,8 @@ call_user_func(function () {
     $packageManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Package\PackageManager::class);
     if ($packageManager->isPackageActive('cal')) {
         $calColumns = [
-            'tx_newspage_calendar' => [
-                'displayCond' => 'FIELD:tx_newspage_type:=:2',
+            'tx_sudhaus7newspage_calendar' => [
+                'displayCond' => 'FIELD:tx_sudhaus7newspage_type:=:2',
                 'exclude' => 1,
                 'label' => $languageFilePrefix.'element.flex.calendar',
                 'config' => [
@@ -283,6 +283,6 @@ call_user_func(function () {
             ]
         ];
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns("tt_content", $calColumns);
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('tt_content', $extKey.'_datetime', '--linebreak--,tx_newspage_calendar', 'after:tx_newspage_highlight');
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('tt_content', $extKey.'_datetime', '--linebreak--,tx_sudhaus7newspage_calendar', 'after:tx_sudhaus7newspage_highlight');
     }
 });

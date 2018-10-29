@@ -6,7 +6,7 @@
  * Time: 10:27
  */
 
-namespace SUDHAUS7\Newspage\ViewHelpers;
+namespace SUDHAUS7\Sudhaus7Newspage\ViewHelpers;
 
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;

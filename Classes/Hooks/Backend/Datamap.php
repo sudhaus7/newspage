@@ -6,7 +6,7 @@
  * Time: 16:04
  */
 
-namespace SUDHAUS7\Newspage\Hooks\Backend;
+namespace SUDHAUS7\Sudhaus7Newspage\Hooks\Backend;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Cache\CacheManager;
@@ -54,7 +54,7 @@ class Datamap
      */
     public function processDatamap_afterDatabaseOperations($status, $table, $id, &$fieldArray, DataHandler &$pObj)
     {
-        if ($status=='new' && $table=='tt_content' && $fieldArray['CType']=='newspage_element') {
+        if ($status=='new' && $table=='tt_content' && $fieldArray['CType']=='sudhaus7newspage_element') {
             $uid = $id;
             if ((int)$uid!==$id) {
                 $uid=$pObj->substNEWwithIDs[$id];
@@ -72,7 +72,7 @@ class Datamap
                         $rootid = $p['uid'];
                     }
                 }
-                $this->cacheManager->flushCachesByTag('newspage_element_root_'.$rootid);
+                $this->cacheManager->flushCachesByTag('sudhaus7newspage_element_root_'.$rootid);
             }
         }
     }
@@ -94,7 +94,7 @@ class Datamap
     {
         if ($command=='delete' && $table=='tt_content') {
             $row = BackendUtility::getRecord($table, $id);
-            if (!empty($row) && $row['CType']=='newspage_element') {
+            if (!empty($row) && $row['CType']=='sudhaus7newspage_element') {
                 if ($this->pm->isPackageAvailable('realurl')) {
                     $this->deleteRealurlCache($row['pid']);
                 }
@@ -118,7 +118,7 @@ class Datamap
                     //Dies this page have newspage elements?
                     $query = $this->databaseConnection->createQueryBuilder();
                     $query->select(...['*'])->from('tt_content');
-                    $query->andWhere($query->expr()->eq('CType', 'newspage_element'));
+                    $query->andWhere($query->expr()->eq('CType', 'sudhaus7newspage_element'));
                     $query->andWhere($query->expr()->eq('deleted', 0));
                     $query->andWhere($query->expr()->eq('pid', $id));
                     $query->orderBy('hidden', 'ASC');
@@ -126,10 +126,10 @@ class Datamap
                     $row = $result->fetch(\PDO::FETCH_ASSOC);
                     if ($row) {
                         if ($this->pm->isPackageAvailable('realurl')) {
-                            if ($row['tx_newspage_showdate'] > 0) {
+                            if ($row['tx_sudhaus7newspage_showdate'] > 0) {
                                 $fieldArray['tx_realurl_pathsegment'] = date(
                                     'd-m-Y',
-                                        $row['tx_newspage_from']
+                                        $row['tx_sudhaus7newspage_from']
                                 ) . '-' . $this->generateslug($fieldArray['title']);
                             } else {
                                 $fieldArray['tx_realurl_pathsegment'] = '';
@@ -152,7 +152,7 @@ class Datamap
                 if (isset($fieldArray['title'])) {
                     $query = $this->databaseConnection->createQueryBuilder();
                     $query->select(...['*'])->from('tt_content');
-                    $query->andWhere($query->expr()->eq('CType', 'newspage_element'));
+                    $query->andWhere($query->expr()->eq('CType', 'sudhaus7newspage_element'));
                     $query->andWhere($query->expr()->eq('deleted', 0));
                     $query->andWhere($query->expr()->eq('pid', $pages_language_overlay['pid']));
     
@@ -162,10 +162,10 @@ class Datamap
                     
                     if ($row) {
                         if ($this->pm->isPackageAvailable('realurl')) {
-                            if ($row['tx_newspage_showdate'] > 0) {
+                            if ($row['tx_sudhaus7newspage_showdate'] > 0) {
                                 $fieldArray['tx_realurl_pathsegment'] = date(
                                     'd-m-Y',
-                                        $row['tx_newspage_from']
+                                        $row['tx_sudhaus7newspage_from']
                                 ) . '-' . $this->generateslug($fieldArray['title']);
                             } else {
                                 $fieldArray['tx_realurl_pathsegment'] = '';
@@ -222,10 +222,10 @@ class Datamap
         } else {
             $aRet[] = $row['sys_language_uid'];
         }
-        if (isset($fieldArray['tx_newspage_from'])) {
-            $aRet[] = $fieldArray['tx_newspage_from'];
+        if (isset($fieldArray['tx_sudhaus7newspage_from'])) {
+            $aRet[] = $fieldArray['tx_sudhaus7newspage_from'];
         } else {
-            $aRet[] = $row['tx_newspage_from'];
+            $aRet[] = $row['tx_sudhaus7newspage_from'];
         }
         if (isset($fieldArray['pid'])) {
             $aRet[] = $fieldArray['pid'];
@@ -243,11 +243,11 @@ class Datamap
     {
         $row = BackendUtility::getRecord('tt_content', $id);
         if (!empty($row)) {
-            list($sys_language_uid, $tx_newspage_from, $pid) = $this->getMetaIfNotSet(
+            list($sys_language_uid, $tx_sudhaus7newspage_from, $pid) = $this->getMetaIfNotSet(
                 $row,
                 $fieldArray
             );
-            if ($tx_newspage_from > 0) {
+            if ($tx_sudhaus7newspage_from > 0) {
                 if ($row['sys_language_uid'] > 0) {
                     $pagetable = 'pages_language_overlay';
                     
@@ -259,15 +259,15 @@ class Datamap
                 if ($page) {
                     if ($this->pm->isPackageAvailable('realurl')) {
                         $tx_realurl_pathsegment = '';
-                        $showdate = isset($fieldArray['tx_newspage_showdate'])
-                            ? $fieldArray['tx_newspage_showdate']
-                            : $row['tx_newspage_showdate'];
+                        $showdate = isset($fieldArray['tx_sudhaus7newspage_showdate'])
+                            ? $fieldArray['tx_sudhaus7newspage_showdate']
+                            : $row['tx_sudhaus7newspage_showdate'];
                         if ($showdate > 0) {
                             $tx_realurl_pathsegment = date(
                                 'd-m-Y',
-                                    isset($fieldArray['tx_newspage_from'])
-                                        ? $fieldArray['tx_newspage_from']
-                                        : $row['tx_newspage_from']
+                                    isset($fieldArray['tx_sudhaus7newspage_from'])
+                                        ? $fieldArray['tx_sudhaus7newspage_from']
+                                        : $row['tx_sudhaus7newspage_from']
                             ) . '-' . $this->generateslug($page['title']);
                         }
                         $this->databaseConnection->update($pagetable, ['tx_realurl_pathsegment' => $tx_realurl_pathsegment], ['uid'=>$page['uid']]);

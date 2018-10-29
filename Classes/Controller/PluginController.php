@@ -1,8 +1,8 @@
 <?php
-namespace SUDHAUS7\Newspage\Controller;
+namespace SUDHAUS7\Sudhaus7Newspage\Controller;
 
 use SUDHAUS7\Sudhaus7Base\Tools\Globals;
-use SUDHAUS7\Newspage\Domain\Model\TtContent;
+use SUDHAUS7\Sudhaus7Newspage\Domain\Model\TtContent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use \TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
@@ -10,34 +10,34 @@ use \TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
 /**
  * Class PluginController
  *
- * @package SUDHAUS7\Newspage\Controller
+ * @package SUDHAUS7\Sudhaus7Newspage\Controller
  */
 class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
     
     /**
-     * @var \SUDHAUS7\Newspage\Domain\Repository\TtContentRepository
+     * @var \SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TtContentRepository
      */
     protected $content;
     
     /**
      * @param TtContentRepository $ttContentRepository
      */
-    public function injectTtContentRepository(\SUDHAUS7\Newspage\Domain\Repository\TtContentRepository $ttContentRepository)
+    public function injectTtContentRepository(\SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TtContentRepository $ttContentRepository)
     {
         $this->content = $ttContentRepository;
     }
 
     /**
-     * @var \SUDHAUS7\Newspage\Domain\Repository\TagRepository
+     * @var \SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TagRepository
      * @inject
      */
     protected $tags;
     
     /**
-     * @param \SUDHAUS7\Newspage\Domain\Repository\TagRepository $tagRepository
+     * @param \SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TagRepository $tagRepository
      */
-    public function injectTagRepository(\SUDHAUS7\Newspage\Domain\Repository\TagRepository $tagRepository)
+    public function injectTagRepository(\SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TagRepository $tagRepository)
     {
         $this->tags = $tagRepository;
     }
@@ -54,7 +54,7 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     public function __construct()
     {
         parent::__construct();
-        $this->pageCache = GeneralUtility::makeInstance(CacheManager::class)->getCache('newspage_pagecache');
+        $this->pageCache = GeneralUtility::makeInstance(CacheManager::class)->getCache('sudhaus7newspage_pagecache');
     }
 
     /**
@@ -157,7 +157,7 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
                 'distinct pid',
                 'tt_content',
-                'ctype="newspage_element" '.
+                'ctype="sudhaus7newspage_element" '.
                     'and pid in ('.implode(',', $list).') '.
                     'and sys_language_uid= '.$GLOBALS['TSFE']->sys_language_uid.
                 $this->configurationManager->getContentObject()->enableFields('tt_content')
@@ -168,7 +168,7 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $sql = 'select distinct tt_content.pid '.
                     'from tt_content '.
                       'join tt_content tt2 on tt2.uid=tt_content.l18n_parent '.$enablefields2.
-                    'where tt_content.ctype="newspage_element" '.
+                    'where tt_content.ctype="sudhaus7newspage_element" '.
                         'and tt_content.deleted=0 '.
                         'and tt_content.hidden=0 '.
                         'and tt_content.pid in ('.implode(',', $list).')  '.
@@ -184,7 +184,7 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         }
 
         $result = array();
-        $clear_array_keys = array('newspage_element_root_'.$rootid,'pageId_' . $GLOBALS['TSFE']->id);
+        $clear_array_keys = array('sudhaus7newspage_element_root_'.$rootid,'pageId_' . $GLOBALS['TSFE']->id);
         while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_row($res)) {
             $result[]=$row[0];
             $clear_array_keys[] = 'pageId_'.$row[0];
@@ -240,7 +240,7 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     private function replaceEmptyShorts($news)
     {
         /**
-         * @var $msg \SUDHAUS7\Newspage\Domain\Model\TtContent
+         * @var $msg \SUDHAUS7\Sudhaus7Newspage\Domain\Model\TtContent
          */
         foreach ($news as $msg) {
             $short = $msg->getBodytext();

@@ -21,7 +21,7 @@
     }
   ],
   "replace": {
-    "newspage": "self.version"
+    "sudhaus7newspage": "self.version"
   },
   "require": {
     "php": "~7.0.0 || ~7.1.0 || ~7.2.0",
@@ -39,12 +39,12 @@
   },
   "autoload": {
     "psr-4": {
-      "SUDHAUS7\\Newspage\\": "Classes/"
+      "SUDHAUS7\\Sudhaus7Newspage\\": "Classes/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "SUDHAUS7\\Newspage\\Tests\\": "Tests/"
+      "SUDHAUS7\\Sudhaus7Newspage\\Tests\\": "Tests/"
     }
   },
   "config": {
@@ -58,7 +58,7 @@
       "dev-master": "2.0.x-dev"
     },
     "typo3/cms": {
-      "extension-key": "newspage",
+      "extension-key": "sudhaus7newspage",
       "cms-package-dir": "{$vendor-dir}/typo3/cms",
       "web-dir": ".Build/public"
     }

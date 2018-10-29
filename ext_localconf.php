@@ -14,12 +14,12 @@
 
 
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['GLOBAL']['cliKeys']['migratettnews'] = array(
-    'EXT:newspage/Classes/Cli/Migratettnews.php',
+    'EXT:sudhaus7_newspage/Classes/Cli/Migratettnews.php',
     '_CLI_lowlevel'
 );
 
 
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php']['tt_content_drawItem'][$_EXTKEY] = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Hooks/Backend/PreviewView.php:SUDHAUS7\Newspage\Hooks\Backend\PreviewView';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php']['tt_content_drawItem'][$_EXTKEY] = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Hooks/Backend/PreviewView.php:SUDHAUS7\Sudhaus7Newspage\Hooks\Backend\PreviewView';
 
 
 
@@ -31,10 +31,8 @@ $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
     \TYPO3\CMS\Core\Imaging\IconRegistry::class
 );
 $iconRegistry->registerIcon(
-    'newspage-plugin', // Icon-Identifier
+    'sudhaus7newspage-plugin', // Icon-Identifier
     \TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class,
-    ['source' => 'EXT:newspage/Resources/Public/Icons/newspage.gif']
+    ['source' => 'EXT:sudhaus7_newspage/Resources/Public/Icons/newspage.gif']
 );
 
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['newspagelegacy']
-    = \SUDHAUS7\Newspage\Updates\MigrateFromSudhaus7Newspage::class;

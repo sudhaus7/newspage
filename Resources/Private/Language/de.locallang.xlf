@@ -178,22 +178,22 @@
 			<trans-unit id="plugin.displaytype.newsevents" xml:space="preserve">
 				<source>News + Events</source>                 <target>Meldungen + Termine</target>
 			</trans-unit>
-			<trans-unit id="tx_newspage_domain_model_tag" xml:space="preserve">
+			<trans-unit id="tx_sudhaus7newspage_domain_model_tag" xml:space="preserve">
 				<source>Newspage Tag</source>                 <target>Meldungen Tag</target>
 			</trans-unit>
-			<trans-unit id="tx_newspage_domain_model_tag.title" xml:space="preserve">
+			<trans-unit id="tx_sudhaus7newspage_domain_model_tag.title" xml:space="preserve">
 				<source>Tag Label</source>                 <target>Titel</target>
 			</trans-unit>
-			<trans-unit id="tx_newspage_domain_model_tag.category" xml:space="preserve">
+			<trans-unit id="tx_sudhaus7newspage_domain_model_tag.category" xml:space="preserve">
 				<source>Tag Category</source>                 <target>Kategory</target>
 			</trans-unit>
-			<trans-unit id="tx_newspage_domain_model_tag.category.country" xml:space="preserve">
+			<trans-unit id="tx_sudhaus7newspage_domain_model_tag.category.country" xml:space="preserve">
 				<source>Country</source>                 <target>Land</target>
 			</trans-unit>
-			<trans-unit id="tx_newspage_domain_model_tag.category.topic" xml:space="preserve">
+			<trans-unit id="tx_sudhaus7newspage_domain_model_tag.category.topic" xml:space="preserve">
 				<source>Topic</source>                 <target>Thema</target>
 			</trans-unit>
-			<trans-unit id="tx_newspage_domain_model_tag.parent_tag" xml:space="preserve">
+			<trans-unit id="tx_sudhaus7newspage_domain_model_tag.parent_tag" xml:space="preserve">
 				<source>Parent Tag</source>                 <target>Eltern Tag</target>
 			</trans-unit>
 			<trans-unit id="plugin.latestTemplate" xml:space="preserve">

@@ -4,9 +4,9 @@ defined('TYPO3_MODE') or die();
 call_user_func(
     function ($extKey, $table) {
         $confArr =
-            unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['newspage']);
-        if ($confArr['newspagetype']) {
-            $languageFilePrefix = 'LLL:EXT:newspage/Resources/Private/Language/locallang.xlf:';
+            unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['sudhaus7newspage']);
+        if ($confArr['sudhaus7newspagetype']) {
+            $languageFilePrefix = 'LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:';
             $newsPageDoktype = 101;
             // Add new page type as possible select item:
             \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
@@ -15,7 +15,7 @@ call_user_func(
                 [
                     'LLL:EXT:' . $extKey . '/Resources/Private/Language/locallang.xlf:news_page_type',
                     $newsPageDoktype,
-                    'EXT:' . $extKey . 'Resources/Public/Images/tx_newspage_domain_model_tag.png'
+                    'EXT:' . $extKey . 'Resources/Public/Images/tx_sudhaus7newspage_domain_model_tag.png'
                 ],
                 '1',
                 'after'
@@ -32,7 +32,7 @@ call_user_func(
                 ]
             );
 
-            $GLOBALS['TCA']['pages']['palettes']['newspage'] = [
+            $GLOBALS['TCA']['pages']['palettes']['sudhaus7newspage'] = [
                 'showitem' => 'doktype;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.doktype_formlabel,--linebreak--,content_from_pid',
 
             ];
@@ -62,7 +62,7 @@ call_user_func(
                     'content_from_pid' => [
                         'config' => [
                             'type' => 'user',
-                            'userFunc' => SUDHAUS7\Newspage\Hooks\Backend\Tca::class.'->tx_newspage_select'
+                            'userFunc' => SUDHAUS7\Sudhaus7Newspage\Hooks\Backend\Tca::class.'->tx_sudhaus7newspage_select'
                         ],
                         'wizards' => []
                     ]
@@ -70,6 +70,6 @@ call_user_func(
             ];
         }
     },
-    'newspage',
+    'sudhaus7newspage',
     'pages'
 );
