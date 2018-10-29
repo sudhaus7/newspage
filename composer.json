@@ -21,13 +21,13 @@
     }
   ],
   "replace": {
-    "sudhaus7newspage": "self.version"
+    "sudhaus7_newspage": "self.version"
   },
   "require": {
     "php": "~7.0.0 || ~7.1.0 || ~7.2.0",
-    "typo3/cms-core": "^8.7.10 || ^9.5.0",
-    "typo3/cms-fluid": "^8.7.10 || ^9.5.0",
-    "typo3/cms-frontend": "^8.7.10 || ^9.5.0"
+    "typo3/cms-core": "^8.7.0 || ^9.5.0",
+    "typo3/cms-fluid": "^8.7.0 || ^9.5.0",
+    "typo3/cms-frontend": "^8.7.0 || ^9.5.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^6.3.0",
