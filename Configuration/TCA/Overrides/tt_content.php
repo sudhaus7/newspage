@@ -126,6 +126,10 @@ call_user_func(function () {
         TCEFORM.tt_content.imagewidth.types.sudhaus7newspage_element.disabled = 1
         TCEFORM.tt_content.imageheight.types.sudhaus7newspage_element.disabled = 1
         TCEFORM.tt_content.imageborder.types.sudhaus7newspage_element.disabled = 1
+        TCEFORM.tt_content.header_type.types.sudhaus7newspage_element.disabled = 1
+        TCEFORM.tt_content.header_type.types.sudhaus7newspage_element.disabled = 1
+        
+        TCEFORM.tt_content.date.types.sudhaus7newspage_element.disabled = 1
     ');
     
     $pluginSignature = $extensionName . '_plugin' ;
