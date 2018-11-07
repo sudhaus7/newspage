@@ -89,10 +89,14 @@ class TtContentRepository extends Repository
     protected function addStandardConstraints(QueryInterface &$query, array $settings)
     {
         $constraints = array();
-        if (!isset($settings['displaytype']) || empty($settings['displaytype'])) {
-            $settings['displaytype'] = 1;
-        }
-        $constraints[] = $query->equals('tx_sudhaus7newspage_type', $settings['displaytype']);
+        
+        // TO BE REMOVED
+        //if (!isset($settings['displaytype']) || empty($settings['displaytype'])) {
+        //    $settings['displaytype'] = 1;
+        //}
+        //$constraints[] = $query->equals('tx_sudhaus7newspage_type', $settings['displaytype']);
+        
+        
         $constraints[] = $query->equals('ctype', 'sudhaus7newspage_element');
 
 

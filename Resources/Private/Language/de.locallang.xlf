@@ -162,22 +162,6 @@
 			</trans-unit>
 
 
-
-			<trans-unit id="plugin.displaytype" xml:space="preserve">
-				<source>What to Display</source>                 <target>Was soll angezeigt werden</target>
-			</trans-unit>
-			<trans-unit id="plugin.displaytype.news" xml:space="preserve">
-				<source>News</source>                 <target>Meldungen</target>
-			</trans-unit>
-			<trans-unit id="plugin.displaytype.events" xml:space="preserve">
-				<source>Events</source>                 <target>Termine</target>
-			</trans-unit>
-			<trans-unit id="plugin.displaytype.projects" xml:space="preserve">
-				<source>Projects</source>                 <target>Projekte</target>
-			</trans-unit>
-			<trans-unit id="plugin.displaytype.newsevents" xml:space="preserve">
-				<source>News + Events</source>                 <target>Meldungen + Termine</target>
-			</trans-unit>
 			<trans-unit id="tx_sudhaus7newspage_domain_model_tag" xml:space="preserve">
 				<source>Newspage Tag</source>                 <target>Meldungen Tag</target>
 			</trans-unit>
