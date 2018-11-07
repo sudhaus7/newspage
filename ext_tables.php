@@ -62,10 +62,11 @@ if (TYPO3_MODE == 'BE') {
         TCEFORM.tt_content.imagewidth.types.sudhaus7newspage_element.disabled = 1
         TCEFORM.tt_content.imageheight.types.sudhaus7newspage_element.disabled = 1
         TCEFORM.tt_content.imageborder.types.sudhaus7newspage_element.disabled = 1
-        TCEFORM.tt_content.header_type.types.sudhaus7newspage_element.disabled = 1
-        TCEFORM.tt_content.header_type.types.sudhaus7newspage_element.disabled = 1
-        
+        TCEFORM.tt_content.header_position.types.sudhaus7newspage_element.disabled = 1
+        TCEFORM.tt_content.header_layout.types.sudhaus7newspage_element.disabled = 1
+        TCEFORM.tt_content.header_link.types.sudhaus7newspage_element.disabled = 1
         TCEFORM.tt_content.date.types.sudhaus7newspage_element.disabled = 1
+        TCEFORM.tt_content.subheader.types.sudhaus7newspage_element.disabled = 1
     ');
     
 }
