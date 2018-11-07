@@ -114,6 +114,21 @@
 			</trans-unit>
 
 
+			<trans-unit id="plugin.scope" xml:space="preserve">
+				<source>The Scope of the Listing</source>
+			</trans-unit>
+			<trans-unit id="plugin.scope.all" xml:space="preserve">
+				<source>All Records</source>
+
+			</trans-unit>
+			<trans-unit id="plugin.scope.past" xml:space="preserve">
+				<source>Only Past Records</source>
+			</trans-unit>
+			<trans-unit id="plugin.scope.future" xml:space="preserve">
+				<source>Only Future Records</source>
+			</trans-unit>
+
+
 
 			<trans-unit id="plugin.listTemplate" xml:space="preserve">
 				<source>Template used in archive listing</source>

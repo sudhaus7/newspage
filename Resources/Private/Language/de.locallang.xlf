@@ -131,16 +131,20 @@
 			</trans-unit>
 
 			<trans-unit id="plugin.scope" xml:space="preserve">
-				<source>The Scope of the Listing</source>                 <target>Einschränkungen in der Auflistung</target>
+				<source>The Scope of the Listing</source>
+				<target>Einschränkungen in der Auflistung</target>
 			</trans-unit>
 			<trans-unit id="plugin.scope.all" xml:space="preserve">
-				<source>All Records</source>                 <target>Alle Einträge anzeigen</target>
+				<source>All Records</source>
+				<target>Alle Einträge anzeigen</target>
 			</trans-unit>
 			<trans-unit id="plugin.scope.past" xml:space="preserve">
-				<source>Only Past Records</source>                 <target>Nur vergangene Einträge anzeigen</target>
+				<source>Only Past Records</source>
+				<target>Nur vergangene Einträge anzeigen</target>
 			</trans-unit>
 			<trans-unit id="plugin.scope.future" xml:space="preserve">
-				<source>Only Future Records</source>                 <target>Nur in der Zukunft liegende Einträge anzeigen</target>
+				<source>Only Future Records</source>
+				<target>Nur in der Zukunft liegende Einträge anzeigen</target>
 			</trans-unit>
 
 

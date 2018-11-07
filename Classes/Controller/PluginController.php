@@ -110,6 +110,7 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         }
     
     
+        
         if (!isset($this->settings['datetimeStringForFilteringNews'])) {
             $this->settings['datetimeStringForFilteringNews'] = 'now';
         }
