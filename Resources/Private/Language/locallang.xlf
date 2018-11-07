@@ -66,15 +66,11 @@
 				<source>Show this many news</source>
 			</trans-unit>
 
-			<trans-unit id="plugin.highlights" xml:space="preserve">
-				<source>Only show highlights (disables paging)</source>
-			</trans-unit>
+
 			<trans-unit id="plugin.ignore" xml:space="preserve">
                 <source>Ignore this many news</source>
             </trans-unit>
-            <trans-unit id="plugin.onlyIgnoreHighlights" xml:space="preserve">
-                <source>Only ignore highlights</source>
-            </trans-unit>
+
 			<trans-unit id="plugin.sortby" xml:space="preserve">
 				<source>Sort direction</source>
 			</trans-unit>

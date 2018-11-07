@@ -55,10 +55,8 @@ class TtContentRepository extends Repository
             $settings['max'] = 9999999;
         }
 
-        //  if (!isset($settings['highlights']) || empty($settings['highlights'])) {
         $query->setOffset((int)$settings['page']);
         $query->setLimit((int)$settings['max']);
-        //  }
 
         $this->findNewsPreDb_dispatch($query, $settings, $pages);
         return $query->execute();
@@ -111,10 +109,11 @@ class TtContentRepository extends Repository
         }
 
 
+        /* To be removed
         if (isset($settings['highlights']) && !empty($settings['highlights'])) {
             $constraints[]=$query->equals('tx_sudhaus7newspage_highlight', 1);
         }
-
+        */
 
         if (isset($settings['month']) && !empty($settings['month'])) {
             $from = new \DateTime($settings['month'].'-01 00:00:00');

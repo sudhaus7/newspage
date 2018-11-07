@@ -179,15 +179,7 @@
 					</config>
 				</TCEforms>
 			</settings.tags>
-			<settings.highlights>
-				<TCEforms>
-					<exclude>1</exclude>
-					<label>LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:plugin.highlights</label>
-					<config>
-						<type>check</type>
-					</config>
-				</TCEforms>
-			</settings.highlights>
+
 			<settings.ignore>
 				<TCEforms>
 					<exclude>1</exclude>
@@ -200,15 +192,7 @@
 					</config>
 				</TCEforms>
 			</settings.ignore>
-			<settings.onlyIgnoreHighlights>
-				<TCEforms>
-					<exclude>1</exclude>
-					<label>LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:plugin.onlyIgnoreHighlights</label>
-					<config>
-						<type>check</type>
-					</config>
-				</TCEforms>
-			</settings.onlyIgnoreHighlights>
+
 			<settings.latestTemplate>
 				<exclude>1</exclude>
 				<label>LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:plugin.latestTemplate</label>

@@ -107,9 +107,7 @@
 			</trans-unit>
 
 
-			<trans-unit id="plugin.highlights" xml:space="preserve">
-				<source>Only show highlights (disables paging)</source>                 <target>Zeige nur als wichtig markierte Einträge</target>
-			</trans-unit>
+
 			<trans-unit id="plugin.sortby" xml:space="preserve">
 				<source>Sort direction</source>                 <target>Sortierung</target>
 			</trans-unit>

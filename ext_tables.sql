@@ -2,8 +2,8 @@ CREATE TABLE tt_content (
   tx_sudhaus7newspage_from  int(11) unsigned NOT NULL DEFAULT '0',
   tx_sudhaus7newspage_tag  int(5) unsigned NOT NULL DEFAULT '0',
   tx_sudhaus7newspage_showdate  int(1) unsigned NOT NULL DEFAULT '0',
-  tx_sudhaus7newspage_showtime  int(1) unsigned NOT NULL DEFAULT '0',
-  tx_sudhaus7newspage_highlight  int(1) unsigned NOT NULL DEFAULT '0'
+  tx_sudhaus7newspage_showtime  int(1) unsigned NOT NULL DEFAULT '0'
+
 );
 
 CREATE TABLE tx_sudhaus7newspage_domain_model_tag (

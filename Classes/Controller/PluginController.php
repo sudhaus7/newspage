@@ -90,11 +90,8 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         
         list($pages, $linkMap) = $this->getPageIds();
         $news = $this->content->findNews($pages, $this->settings);
-        if ($news->count() == 0 && $this->settings['highlights']) {
-            unset($this->settings['highlights']);
-            list($pages, $linkMap) = $this->getPageIds();
-            $news = $this->content->findNews($pages, $this->settings);
-        }
+        
+        
         if ($this->settings['ignore']) {
             $news = $this->ignoreNews($news);
         }
@@ -224,11 +221,18 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
         return  $complete;
     }
-
+    
+    /**
+     * Ignore News, needs to be refactored into limit - this belongs to the Repository
+     *
+     * @param $news
+     * @return mixed
+     */
     private function ignoreNews($news)
     {
         $news = $news->toArray();
 
+        /* TO BE REMOVED
         if ($this->settings['onlyIgnoreHighlights']) {
             $counter = 0;
             $news_new = array();
@@ -248,6 +252,9 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             array_splice($news, 0, $this->settings['ignore']);
             return $news;
         }
+        */
+        array_splice($news, 0, $this->settings['ignore']);
+        return $news;
     }
 
     public function injectContent(\SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TtContentRepository $content)
@@ -377,12 +384,7 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         list($pages, $linkMap) = $this->getPageIds();
         $news = $this->content->findNews($pages, $this->settings);
 
-
-        if ($news->count() == 0 && $this->settings['highlights']) {
-            unset($this->settings['highlights']);
-            list($pages, $linkMap) = $this->getPageIds();
-            $news = $this->content->findNews($pages, $this->settings);
-        }
+        
         if ($this->settings['ignore']) {
             $news = $this->ignoreNews($news);
         }
@@ -420,11 +422,8 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
         list($pages, $linkMap) = $this->getPageIds();
         $news = $this->content->findNews($pages, $this->settings);
-        if ($news->count() == 0 && $this->settings['highlights']) {
-            unset($this->settings['highlights']);
-            list($pages, $linkMap) = $this->getPageIds();
-            $news = $this->content->findNews($pages, $this->settings);
-        }
+      
+        
         $this->mapNewspagePid($news, $linkMap);
         $newscontainer = [];
         foreach ($news as $rec) {

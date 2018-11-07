@@ -75,15 +75,6 @@ call_user_func(function () {
 
             )
         ),
-        'tx_sudhaus7newspage_highlight'=>array(
-            'displayCond' => 'FIELD:tx_sudhaus7newspage_type:>:0',
-            'exclude'=>0,
-            'label'=>$languageFilePrefix.'element.flex.highlight',
-            'config'=>array(
-                'type'=>'check',
-
-            )
-        ),
         'tx_sudhaus7newspage_from'=>array(
             'displayCond' => array(
                 'OR'=> array(
@@ -225,7 +216,7 @@ call_user_func(function () {
     $GLOBALS['TCA']['tt_content']['ctrl']['typeicon_classes'][$pluginSignature] = 'mimetypes-x-content-text';
 
 
-    $TCA['tt_content']['palettes'][$extKey.'_datetime']['showitem'] = 'tx_sudhaus7newspage_from,tx_sudhaus7newspage_to,tx_sudhaus7newspage_showdate,tx_sudhaus7newspage_highlight';
+    $TCA['tt_content']['palettes'][$extKey.'_datetime']['showitem'] = 'tx_sudhaus7newspage_from,tx_sudhaus7newspage_to,tx_sudhaus7newspage_showdate';
 
     //$tx_sudhaus7newspage_latlng = $confArr['newspagelatlngsupport']?'tx_sudhaus7newspage_latlng,':'';
 
@@ -233,7 +224,7 @@ call_user_func(function () {
         'showitem' => '
 				--palette--;' . $frontendLanguageFilePrefix . 'palette.general;general,tx_sudhaus7newspage_type,
 				--palette--;' . $frontendLanguageFilePrefix . 'palette.headers;headers,tx_sudhaus7newspage_place,tx_sudhaus7newspage_who,rowDescription,
-				--palette--;;'.$extKey.'_datetime,'.($confArr['newspagelatlngsupport']?'tx_sudhaus7newspage_latlng,':'').'tx_sudhaus7newspage_tag,
+				--palette--;;'.$extKey.'_datetime,tx_sudhaus7newspage_tag,
 				bodytext;' . $languageFilePrefix . 'bodytext_formlabel,image,tx_sudhaus7newspage_showimageindetail,
 			--div--;' . $frontendLanguageFilePrefix . 'tabs.appearance,
 				layout;' . $frontendLanguageFilePrefix . 'layout_formlabel,
@@ -284,6 +275,5 @@ call_user_func(function () {
             ]
         ];
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns("tt_content", $calColumns);
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('tt_content', $extKey.'_datetime', '--linebreak--,tx_sudhaus7newspage_calendar', 'after:tx_sudhaus7newspage_highlight');
     }
 });
