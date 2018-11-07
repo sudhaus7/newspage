@@ -122,15 +122,7 @@ call_user_func(function () {
 		'
     ];
     
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
-        TCEFORM.tt_content.imagewidth.types.sudhaus7newspage_element.disabled = 1
-        TCEFORM.tt_content.imageheight.types.sudhaus7newspage_element.disabled = 1
-        TCEFORM.tt_content.imageborder.types.sudhaus7newspage_element.disabled = 1
-        TCEFORM.tt_content.header_type.types.sudhaus7newspage_element.disabled = 1
-        TCEFORM.tt_content.header_type.types.sudhaus7newspage_element.disabled = 1
-        
-        TCEFORM.tt_content.date.types.sudhaus7newspage_element.disabled = 1
-    ');
+   
     
     $pluginSignature = $extensionName . '_plugin' ;
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin('SUDHAUS7.'.$extKey, 'Plugin', $languageFilePrefix.'tt_content.'.$pluginSignature);

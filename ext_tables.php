@@ -56,6 +56,18 @@ if (TYPO3_MODE == 'BE') {
             }
         }
     ');
+    
+    
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
+        TCEFORM.tt_content.imagewidth.types.sudhaus7newspage_element.disabled = 1
+        TCEFORM.tt_content.imageheight.types.sudhaus7newspage_element.disabled = 1
+        TCEFORM.tt_content.imageborder.types.sudhaus7newspage_element.disabled = 1
+        TCEFORM.tt_content.header_type.types.sudhaus7newspage_element.disabled = 1
+        TCEFORM.tt_content.header_type.types.sudhaus7newspage_element.disabled = 1
+        
+        TCEFORM.tt_content.date.types.sudhaus7newspage_element.disabled = 1
+    ');
+    
 }
 call_user_func(
     function ($extKey) {
@@ -87,8 +99,5 @@ call_user_func(
 );
 
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
-TCEFORM.tt_content.tx_sudhaus7newspage_showimageindetail.disabled = 1
-');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/Typoscript', 'Sudhaus7 NewsPage Templates');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sudhaus7newspage_domain_model_tag');
