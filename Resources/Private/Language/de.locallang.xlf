@@ -9,19 +9,19 @@
 				<source>Teaser</source>
 				<target>Teaser</target>
 			</trans-unit>
-            <trans-unit id="tt_content.newspage_element" xml:space="preserve">
+            <trans-unit id="tt_content.sudhaus7newspage_element" xml:space="preserve">
 				<source>News/Event/Project Element</source>
                 <target>Meldung</target>
 			</trans-unit>
-			<trans-unit id="tt_content.newspage_element.description" xml:space="preserve">
+			<trans-unit id="tt_content.sudhaus7newspage_element.description" xml:space="preserve">
 				<source>Mark this page as News</source>
                 <target>Dieses Element markiert die Seite als Meldung</target>
 			</trans-unit>
-			<trans-unit id="tt_content.newspage_plugin" xml:space="preserve">
+			<trans-unit id="tt_content.sudhaus7newspage_plugin" xml:space="preserve">
 				<source>News/Event/Project Listing</source>
                 <target>Meldungen ausgeben</target>
 			</trans-unit>
-			<trans-unit id="tt_content.newspage_plugin.description" xml:space="preserve">
+			<trans-unit id="tt_content.sudhaus7newspage_plugin.description" xml:space="preserve">
 				<source>List the News/Event/Project Elements</source>
                 <target>Listet Meldungen in verschiedenen Formaten auf</target>
 			</trans-unit>

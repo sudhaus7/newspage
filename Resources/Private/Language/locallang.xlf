@@ -11,24 +11,21 @@
 			<trans-unit id="bodytext_formlabel" xml:space="preserve">
 				<source>Teaser</source>
 			</trans-unit>
-			<trans-unit id="tt_content.newspage_element" xml:space="preserve">
+			<trans-unit id="tt_content.sudhaus7newspage_element" xml:space="preserve">
 				<source>News Element</source>
 			</trans-unit>
-			<trans-unit id="tt_content.newspage_element.description" xml:space="preserve">
+			<trans-unit id="tt_content.sudhaus7newspage_element.description" xml:space="preserve">
 				<source>Mark this page as News</source>
 			</trans-unit>
-			<trans-unit id="tt_content.newspage_plugin" xml:space="preserve">
+			<trans-unit id="tt_content.sudhaus7newspage_plugin" xml:space="preserve">
 				<source>News Listing</source>
 			</trans-unit>
-			<trans-unit id="tt_content.newspage_plugin.description" xml:space="preserve">
+			<trans-unit id="tt_content.sudhaus7newspage_plugin.description" xml:space="preserve">
 				<source>List Pages containing news</source>
 			</trans-unit>
 
 			<trans-unit id="element.flex.news.from" xml:space="preserve">
 				<source>Date/From</source>
-			</trans-unit>
-			<trans-unit id="element.flex.news.to" xml:space="preserve">
-				<source>To</source>
 			</trans-unit>
 
 

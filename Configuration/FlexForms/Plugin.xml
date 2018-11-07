@@ -192,7 +192,7 @@
 					</config>
 				</TCEforms>
 			</settings.ignore>
-
+<!--
 			<settings.latestTemplate>
 				<exclude>1</exclude>
 				<label>LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:plugin.latestTemplate</label>
@@ -229,9 +229,7 @@
 					<size>1</size>
 				</config>
 			</settings.listTemplate>
-
-
-
+-->
 
 			<!--
             <settings.newsdate>
