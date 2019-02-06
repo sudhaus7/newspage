@@ -1,4 +1,11 @@
 {namespace bf=SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers}
+<html
+        xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+        xmlns="http://www.w3.org/1999/xhtml"
+        lang="en"
+        f:schemaLocation="https://fluidtypo3.org/schemas/fluid-master.xsd"
+        data-namespace-typo3-fluid="true"
+>
 <f:if condition="{record.tx_sudhaus7newspage_type} == 1">
     <bf:date format="LOCALEDATE" respectlocale="1" date="{record.tx_sudhaus7newspage_from}" length="short"/> - {record.header}
 
@@ -8,3 +15,4 @@
     <bf:date format="LOCALEDATE" respectlocale="1" date="{record.tx_sudhaus7newspage_from}"  length="short"/> - <bf:date format="LOCALEDATE" respectlocale="1" date="{record.tx_sudhaus7newspage_to}"  length="short"/>
     (<bf:date format="LOCALETIME" respectlocale="1" date="{record.tx_sudhaus7newspage_from}"/> - <bf:date format="LOCALETIME" respectlocale="1" date="{record.tx_sudhaus7newspage_to}"/>)
 </f:if>
+</html>

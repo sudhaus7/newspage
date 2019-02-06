@@ -1,3 +1,4 @@
+{namespace s7=SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers}
 <html xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
       xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
       xmlns:s7="http://sudhaus7.de/ns/SUDHAUS7/Sudhaus7Viewhelpers/ViewHelpers"
@@ -6,16 +7,10 @@
       f:schemaLocation="https://fluidtypo3.org/schemas/fluid-master.xsd"
       v:schemaLocation="https://fluidtypo3.org/schemas/vhs-master.xsd"
       data-namespace-typo3-fluid="true">
-{namespace s7=SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers}
-{namespace bkv3=BFACTOR\BfactorBkv3\ViewHelpers}
-
-
 <f:layout name="Rss" />
 <f:section name="main">
-    {namespace bf=SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers}
     <f:for each="{news}" as="record">
         <item>
-
             <title>{record.news.header}</title>
             <link><f:uri.page absolute="1" pageUid="{record.news.pid}"></f:uri.page></link>
             <description>
@@ -28,7 +23,7 @@
                 </f:format.cdata>
             </description>
             <f:if condition="{record.content}">
-                <content:encoded><f:format.cdata><p></p>{record.content}</f:format.cdata></content:encoded>
+                <f:format.cdata><p></p>{record.content}</f:format.cdata>
             </f:if>
             <pubDate><s7:date format="RFC2822" date="{record.news.txSudhaus7newspageFrom}"/></pubDate>
             <guid>
@@ -37,5 +32,4 @@
         </item>
     </f:for>
 </f:section>
-
 </html>

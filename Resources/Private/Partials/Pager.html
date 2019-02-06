@@ -1,4 +1,10 @@
-
+<html
+        xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+        xmlns="http://www.w3.org/1999/xhtml"
+        lang="en"
+        f:schemaLocation="https://fluidtypo3.org/schemas/fluid-master.xsd"
+        data-namespace-typo3-fluid="true"
+>
 <ul class="pagination">
     <li class="{f:if(condition:pager.current,then:'waves-effect',else:'disabled')}">
         <f:link.action arguments="{page: pager.prev.page}">
@@ -17,3 +23,4 @@
         </f:link.action>
     </li>
 </ul>
+</html>

@@ -1,15 +1,17 @@
-<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
-     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
+{namespace bf=SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers}
+<html
+        xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+        xmlns="http://www.w3.org/1999/xhtml"
+        lang="en"
+        f:schemaLocation="https://fluidtypo3.org/schemas/fluid-master.xsd"
+        data-namespace-typo3-fluid="true"
+>
 <f:layout name="Plain"/>
-<f:section name="main">
-    {namespace bf=SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers}
+<f:section name="main" />
     <div id="carousel" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner" role="listbox">
             <f:for each="{news}" as="record" iteration="itemiterator">
-                <f:if condition="{itemiterator.isFirst} == 1">
-                    <f:then><div class="item active"></f:then>
-                    <f:else><div class="item"></f:else>
-                </f:if>
+                    <div class="item {f:if(condition: itemtierator.isFirst, then: 'active')}">
                     <f:for each="{record.image}" as="img" iteration="iterator">
                         <f:if condition="{iterator.isFirst} == 1"><f:image treatIdAsReference="1" src="{img.uid}" alt="" width="1281" height="427c"/></f:if>
                     </f:for>
@@ -40,4 +42,4 @@
         </a>
     </div>
 </f:section>
-</div>
+</html>

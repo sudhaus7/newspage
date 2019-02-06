@@ -1,4 +1,11 @@
 {namespace bf=SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers}
+<html
+        xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+        xmlns="http://www.w3.org/1999/xhtml"
+        lang="en"
+        f:schemaLocation="https://fluidtypo3.org/schemas/fluid-master.xsd"
+        data-namespace-typo3-fluid="true"
+>
 <f:if condition="{record.txSudhaus7newspageShowdate} == 1">
     <f:if condition="{record.txSudhaus7newspageTo} > 0">
         <f:then>
@@ -13,3 +20,4 @@
     </f:if>
 </f:if>
 {record.subheader}
+</html>

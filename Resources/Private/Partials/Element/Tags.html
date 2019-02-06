@@ -1,5 +1,13 @@
+<html
+        xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+        xmlns="http://www.w3.org/1999/xhtml"
+        lang="en"
+        f:schemaLocation="https://fluidtypo3.org/schemas/fluid-master.xsd"
+        data-namespace-typo3-fluid="true"
+>
 <f:if condition="{tags}">
     | <f:for each="{tags}" as="tag" iteration="iterator">
             {tag.title}<f:if condition="{iterator.isLast} != 1">, </f:if>
      </f:for>
 </f:if>
+</html>
