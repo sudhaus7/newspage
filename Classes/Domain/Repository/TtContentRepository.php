@@ -95,12 +95,14 @@ class TtContentRepository extends Repository
         $query = $ret[0]['query'];
         $constraints = $ret[0]['constraints'];
     }
-
+    
     /**
      * @param QueryInterface $query
      * @param array $settings
-     *
+     * @param array $pages
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      */
     protected function addStandardConstraints(QueryInterface &$query, array $settings, array $pages)
     {
@@ -163,7 +165,7 @@ class TtContentRepository extends Repository
         }
         $constraints[]=$query->equals('deleted', '0');
 
-        $this->addStandardConstraintsSignal_dispatch(&$constraints, &$query, $settings, $pages);
+        $this->addStandardConstraintsSignal_dispatch($constraints, $query, $settings, $pages);
 
         $query->matching($query->logicalAnd($constraints));
         //return $query;
