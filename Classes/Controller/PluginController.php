@@ -166,7 +166,7 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             : 6;
 
         $list =  $this->content->getTreeList($ids, $depth);
-        
+
         if (empty($list)) {
             $list = $GLOBALS['TSFE']->rootLine[0]['uid'];
         }
@@ -220,10 +220,11 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
         $result = array();
         $clear_array_keys = array('sudhaus7newspage_element_root_'.$rootid,'pageId_' . $GLOBALS['TSFE']->id);
-        while ($row = $res->fetchAll()) {
-            $result[]=$row[0];
-            $clear_array_keys[] = 'pageId_'.$row[0];
+        while ($row = $res->fetch()) {
+            $result[]=$row['pid'];
+            $clear_array_keys[] = 'pageId_'.$row['pid'];
         }
+
         $newsPageTypes = $this->databaseConnection->getQueryBuilderForTable('pages')
             ->select('*')
             ->from('pages')
@@ -401,7 +402,7 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         list($pages, $linkMap) = $this->getPageIds();
         $news = $this->content->findNews($pages, $this->settings);
 
-        
+
         if ($this->settings['ignore']) {
             $news = $this->ignoreNews($news);
         }

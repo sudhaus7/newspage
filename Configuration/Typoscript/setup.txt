@@ -91,7 +91,7 @@ tt_content.sudhaus7newspage_element {
 		}
 	}
 	stdWrap {
-		editIcons = tt_content: header [header:layout]
+		editIcons = tt_content: header [header_layout],
 		editIcons {
 			iconTitle.data = LLL:EXT:fluid_styled_content/Resources/Private/Language/FrontendEditing.xlf:editIcon.menu
 		}
