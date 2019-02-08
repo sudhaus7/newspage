@@ -66,3 +66,34 @@ config.tx_extbase.persistence.classes {
 	}
 }
 #config.content_from_pid_allowOutsideDomain = 1
+
+lib.contentElement {
+	templateRootPaths {
+		1 = {$plugin.tx_sudhaus7newspage.view.templateRootPath}
+	}
+	partialRootPaths {
+		1 = {$plugin.tx_sudhaus7newspage.view.partialRootPath}
+	}
+	layoutRootPaths {
+		1 = {$plugin.tx_sudhaus7newspage.view.layoutRootPath}
+	}
+}
+
+tt_content.sudhaus7newspage_element < lib.contentElement
+tt_content.sudhaus7newspage_element {
+	templateName = NewspageElement
+	dataProcessing {
+		10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+		10 {
+			references {
+				fieldName = image
+			}
+		}
+	}
+	stdWrap {
+		editIcons = tt_content: header [header:layout]
+		editIcons {
+			iconTitle.data = LLL:EXT:fluid_styled_content/Resources/Private/Language/FrontendEditing.xlf:editIcon.menu
+		}
+	}
+}
