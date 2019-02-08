@@ -45,7 +45,7 @@ class TtContentRepository extends Repository
         $query->setOrderings(array('tx_sudhaus7newspage_from'=>$order));
 
 
-        $this->addStandardConstraints($query, $settings);
+        $this->addStandardConstraints($query, $settings, $pages);
 
 
         if (!isset($settings['page'])) {
@@ -77,6 +77,24 @@ class TtContentRepository extends Repository
         $ret = $signalSlotDispatcher->dispatch(__CLASS__, 'findNewsPreDb', [$data]);
         $query = $ret[0]['query'];
     }
+    
+    /**
+     * @param $query
+     * @param $settings
+     *
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
+     */
+    private function addStandardConstraintsSignal_dispatch(&$constraints, &$query, $settings, $pages)
+    {
+        
+        /** @var Dispatcher $signalSlotDispatcher */
+        $signalSlotDispatcher = GeneralUtility::makeInstance(Dispatcher::class);
+        $data = ['query'=>$query,'settings'=>$settings,'constraints'=>$constraints,'pages'=>$pages];
+        $ret = $signalSlotDispatcher->dispatch(__CLASS__, 'addStandardConstraints', [$data]);
+        $query = $ret[0]['query'];
+        $constraints = $ret[0]['constraints'];
+    }
 
     /**
      * @param QueryInterface $query
@@ -84,7 +102,7 @@ class TtContentRepository extends Repository
      *
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    protected function addStandardConstraints(QueryInterface &$query, array $settings)
+    protected function addStandardConstraints(QueryInterface &$query, array $settings, array $pages)
     {
         $constraints = array();
         
@@ -145,6 +163,8 @@ class TtContentRepository extends Repository
         }
         $constraints[]=$query->equals('deleted', '0');
 
+        $this->addStandardConstraintsSignal_dispatch(&$constraints, &$query, $settings, $pages);
+
         $query->matching($query->logicalAnd($constraints));
         //return $query;
     }
@@ -189,7 +209,7 @@ class TtContentRepository extends Repository
         $querySettings->setStoragePageIds($pages);
         $querySettings->setLanguageUid($GLOBALS['TSFE']->sys_language_uid);
         $query->setQuerySettings($querySettings);
-        $this->addStandardConstraints($query, $settings);
+        $this->addStandardConstraints($query, $settings, $pages);
 
 
         return $query->count();
