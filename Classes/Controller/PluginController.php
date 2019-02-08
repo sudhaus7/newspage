@@ -1,7 +1,6 @@
 <?php
 namespace SUDHAUS7\Sudhaus7Newspage\Controller;
 
-use SUDHAUS7\Sudhaus7Base\Tools\Globals;
 use SUDHAUS7\Sudhaus7Newspage\Domain\Model\TtContent;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -27,7 +26,18 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      *
      */
     protected $content;
-    
+
+    /**
+     * @var \TYPO3\CMS\Core\Cache\CacheManager
+     */
+    protected $pageCache = null;
+
+    /**
+     * @var \SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TagRepository
+     *
+     */
+    protected $tags;
+
     /**
      * @param \SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TtContentRepository $ttContentRepository
      */
@@ -37,12 +47,6 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     }
 
     /**
-     * @var \SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TagRepository
-     *
-     */
-    protected $tags;
-    
-    /**
      * @param \SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TagRepository $tagRepository
      */
     public function injectTagRepository(\SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TagRepository $tagRepository)
@@ -51,9 +55,20 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     }
 
     /**
-     * @var \TYPO3\CMS\Core\Cache\CacheManager
+     * @param \SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TtContentRepository $content
      */
-    protected $pageCache = null;
+    public function injectContent(\SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TtContentRepository $content)
+    {
+        $this->content = $content;
+    }
+
+    /**
+     * @param \SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TagRepository $tags
+     */
+    public function injectTags(\SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TagRepository $tags)
+    {
+        $this->tags = $tags;
+    }
 
     /**
      * PluginController constructor.
@@ -171,6 +186,7 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
                 ->groupBy('pid')
                 ->execute();
         } else {
+            /*
             $enablefields = $this->configurationManager->getContentObject()->enableFields('tt_content');
             $enablefields2 = str_replace('tt_content', 'tt2', $enablefields);
             $sql = 'select distinct tt_content.pid '.
@@ -183,6 +199,17 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
                         'and tt_content.sys_language_uid= '.$GLOBALS['TSFE']->sys_language_uid.$enablefields;
 
             $res =  $GLOBALS['TYPO3_DB']->sql_query($sql);
+            $ttContentBuilder = $this->databaseConnection->getQueryBuilderForTable('tt_content');
+            $res = $ttContentBuilder
+                ->select('tt_content.pid')
+                ->from('tt_content')
+                ->join(
+                    'tt_content',
+                    'tt_content',
+                    'tt2',
+                    $ttContentBuilder->expr()->eq('tt_content.l18n_parent',$ttContentBuilder->quoteIdentifier('tt2.uid'))
+                    );
+            */
         }
         $rootid = $GLOBALS['TSFE']->rootLine[0]['uid'];
         foreach ($GLOBALS['TSFE']->rootLine as $p) {
@@ -225,7 +252,7 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     /**
      * Ignore News, needs to be refactored into limit - this belongs to the Repository
      *
-     * @param $news
+     * @param  $news
      * @return mixed
      */
     private function ignoreNews($news)
@@ -255,16 +282,6 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         */
         array_splice($news, 0, $this->settings['ignore']);
         return $news;
-    }
-
-    public function injectContent(\SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TtContentRepository $content)
-    {
-        $this->content = $content;
-    }
-
-    public function injectTags(\SUDHAUS7\Sudhaus7Newspage\Domain\Repository\TagRepository $tags)
-    {
-        $this->tags = $tags;
     }
 
     private function replaceEmptyShorts($news)
@@ -404,7 +421,6 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     }
     
     /**
-     * @return string
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
@@ -428,6 +444,7 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $newscontainer = [];
         foreach ($news as $rec) {
             $record = ['news'=>$rec,'content'=>''];
+            /*
             if (isset($this->settings['fullrss']) && !empty($this->settings['fullrss'])) {
                 $content = Globals::db()->exec_SELECTgetRows(
                     '*',
@@ -449,6 +466,7 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
                     }
                 }
             }
+            */
             $newscontainer[]=$record;
         }
         //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($newscontainer); exit;

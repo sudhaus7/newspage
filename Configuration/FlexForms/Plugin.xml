@@ -25,10 +25,6 @@
 								<numIndex index="0">LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:plugin.action.rss</numIndex>
 								<numIndex index="1">Plugin->rss</numIndex>
 							</numIndex>
-							<numIndex index="3" type="array">
-								<numIndex index="0">LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:plugin.action.random</numIndex>
-								<numIndex index="1">Plugin->random</numIndex>
-							</numIndex>
 						</items>
 						<minitems>1</minitems>
 						<maxitems>1</maxitems>
