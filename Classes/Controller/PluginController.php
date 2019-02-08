@@ -102,6 +102,9 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
         $this->settings['page'] = $this->request->hasArgument('page') ? $this->request->getArgument('page') : 0;
         $this->settings['month'] = $this->request->hasArgument('month') ? $this->request->getArgument('month') : null;
+    
+    
+        $this->modifySettings_dispatch();
         
         list($pages, $linkMap) = $this->getPageIds();
         $news = $this->content->findNews($pages, $this->settings);
@@ -313,6 +316,8 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      * @return array
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      */
     private function generatePager($page)
     {
@@ -396,7 +401,8 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         if (!isset($this->settings['listTemplate'])) {
             $this->settings['listTemplate'] = 'Default';
         }
-
+    
+        $this->modifySettings_dispatch();
 
         list($pages, $linkMap) = $this->getPageIds();
         $news = $this->content->findNews($pages, $this->settings);
@@ -435,7 +441,9 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $this->settings['month'] = $this->request->hasArgument('month')
             ? $this->request->getArgument('month')
             : null;
-
+    
+        $this->modifySettings_dispatch();
+        
         list($pages, $linkMap) = $this->getPageIds();
         $news = $this->content->findNews($pages, $this->settings);
       
@@ -515,4 +523,18 @@ class PluginController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $ret = $signalSlotDispatcher->dispatch(__CLASS__, 'newsBeforeDisplay', [$data]);
         $news = $ret[0]['news'];
     }
+    
+    /**
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
+     */
+    private function modifySettings_dispatch() {
+        
+        /** @var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher $signalSlotDispatcher */
+        $signalSlotDispatcher = GeneralUtility::makeInstance(Dispatcher::class);
+        $data = ['settings'=>$this->settings,'request'=>$this->request,'configurationManager'=>$this->configurationManager];
+        $ret = $signalSlotDispatcher->dispatch(__CLASS__, 'modifySettings', [$data]);
+        $this->settings = $ret[0]['settings'];
+    }
+    
 }
