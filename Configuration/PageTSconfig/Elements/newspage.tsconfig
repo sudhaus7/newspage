@@ -1,0 +1,13 @@
+mod.wizards.newContentElement.wizardItems.common {
+	elements {
+		sudhaus7newspage_element {
+			iconIdentifier = default-icon
+			title = LLL:EXT:template/Resources/Private/Language/locallang.xlf:contentbeam.wizard.title
+			description = LLL:EXT:template/Resources/Private/Language/locallang.xlf:contentbeam.wizard.description
+			tt_content_defValues {
+				CType = contentbeam
+			}
+		}
+	}
+	show := addToList(contentbeam)
+}

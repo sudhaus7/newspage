@@ -1,8 +1,14 @@
 <?php
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin('SUDHAUS7.'.$_EXTKEY, 'Plugin', array('Plugin' => 'list,latest,rss,random' ), array('Plugin' => 'list,latest,rss,random' ), \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_PLUGIN);
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    'SUDHAUS7.'.$_EXTKEY,
+    'Plugin',
+    array('Plugin' => 'list,latest,rss,random' ),
+    array('Plugin' => 'list,latest,rss,random' ),
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_PLUGIN
+);
 
-
+/*
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
     'SUDHAUS7.'.$_EXTKEY,
@@ -12,7 +18,7 @@
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
 );
 
-
+*/
 /*
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['GLOBAL']['cliKeys']['migratettnews'] = array(
     'EXT:sudhaus7_newspage/Classes/Cli/Migratettnews.php',
@@ -20,7 +26,6 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['GLOBAL']['cliKeys']['migratettnews'] 
 );
 */
 
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php']['tt_content_drawItem'][$_EXTKEY] = \SUDHAUS7\Sudhaus7Newspage\Hooks\Backend\PreviewView::class;
 
 
 

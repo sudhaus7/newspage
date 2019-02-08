@@ -38,36 +38,7 @@ if (TYPO3_MODE == 'BE') {
 
 
 
-    $pluginSignature = $extensionName . '_element' ;
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
-        mod.wizards.newContentElement.wizardItems {
-            common {
-                elements {
-                    '.$pluginSignature.' {
-                        title = '.$languageFilePrefix.'tt_content.'.$pluginSignature.'
-                        description = '.$languageFilePrefix.'tt_content.'.$pluginSignature.'.description
-                        iconIdentifier = newspage-plugin
-                        tt_content_defValues {
-                            CType = '.$pluginSignature.'
-                        }
-                    }
-                }
-                show := addToList('.$pluginSignature.')
-            }
-        }
-    ');
-    
-    
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
-        TCEFORM.tt_content.imagewidth.types.sudhaus7newspage_element.disabled = 1
-        TCEFORM.tt_content.imageheight.types.sudhaus7newspage_element.disabled = 1
-        TCEFORM.tt_content.imageborder.types.sudhaus7newspage_element.disabled = 1
-        TCEFORM.tt_content.header_position.types.sudhaus7newspage_element.disabled = 1
-        TCEFORM.tt_content.header_layout.types.sudhaus7newspage_element.disabled = 1
-        TCEFORM.tt_content.header_link.types.sudhaus7newspage_element.disabled = 1
-        TCEFORM.tt_content.date.types.sudhaus7newspage_element.disabled = 1
-        TCEFORM.tt_content.subheader.types.sudhaus7newspage_element.disabled = 1
-    ');
+
     
 }
 call_user_func(

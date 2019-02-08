@@ -19,9 +19,8 @@ call_user_func(function () {
         $confArr['newspagelatlngactivate'] = [];
     }
 
-    
+    // new tt_content columns
     $tempColumns = array(
-
         'tx_sudhaus7newspage_showimageindetail'=>array(
             //    'l10n_mode'=>'exclude',
             'exclude'=>0,
@@ -79,12 +78,12 @@ call_user_func(function () {
         ),
     );
 
-
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns("tt_content", $tempColumns);
 
 
     $extensionName = strtolower(\TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToUpperCamelCase($extKey));
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin('SUDHAUS7.'.$extKey, 'Element', 'News Element');
+
+    // register newspage_element as content element
     $pluginSignature = $extensionName . '_element';
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
         'tt_content',
@@ -97,6 +96,37 @@ call_user_func(function () {
         'textmedia',
         'after'
     );
+
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
+        mod.wizards.newContentElement.wizardItems {
+            common {
+                elements {
+                    '.$pluginSignature.' {
+                        title = '.$languageFilePrefix.'tt_content.'.$pluginSignature.'
+                        description = '.$languageFilePrefix.'tt_content.'.$pluginSignature.'.description
+                        iconIdentifier = newspage-plugin
+                        tt_content_defValues {
+                            CType = '.$pluginSignature.'
+                        }
+                    }
+                }
+                show := addToList('.$pluginSignature.')
+            }
+        }
+    ');
+
+
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
+        TCEFORM.tt_content.imagewidth.types.sudhaus7newspage_element.disabled = 1
+        TCEFORM.tt_content.imageheight.types.sudhaus7newspage_element.disabled = 1
+        TCEFORM.tt_content.imageborder.types.sudhaus7newspage_element.disabled = 1
+        TCEFORM.tt_content.header_position.types.sudhaus7newspage_element.disabled = 1
+        TCEFORM.tt_content.header_layout.types.sudhaus7newspage_element.disabled = 1
+        TCEFORM.tt_content.header_link.types.sudhaus7newspage_element.disabled = 1
+        TCEFORM.tt_content.date.types.sudhaus7newspage_element.disabled = 1
+        TCEFORM.tt_content.subheader.types.sudhaus7newspage_element.disabled = 1
+    ');
+
     $GLOBALS['TCA']['tt_content']['ctrl']['typeicon_classes'][$pluginSignature] = 'mimetypes-x-content-text';
     
     $TCA['tt_content']['palettes'][$extKey.'_datetime']['showitem'] = 'tx_sudhaus7newspage_from,tx_sudhaus7newspage_showdate';
@@ -121,7 +151,7 @@ call_user_func(function () {
 
 		'
     ];
-    
+    // end write element to tt_content palette
    
     
     $pluginSignature = $extensionName . '_plugin' ;
@@ -130,5 +160,6 @@ call_user_func(function () {
     $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $extKey . '/Configuration/FlexForms/Plugin.xml');
 
-   
+
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php']['tt_content_drawItem'][$extKey] = \SUDHAUS7\Sudhaus7Newspage\Hooks\Backend\PreviewView::class;
 });
