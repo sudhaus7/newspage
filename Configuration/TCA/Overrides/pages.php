@@ -3,10 +3,11 @@ defined('TYPO3_MODE') or die();
 
 call_user_func(
     function ($extKey, $table) {
+        $languageFilePrefix = 'LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:';
         $confArr =
             unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['sudhaus7_newspage']);
         if ($confArr['newspagetype']) {
-            $languageFilePrefix = 'LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:';
+
             $newsPageDoktype = 101;
             // Add new page type as possible select item:
             \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(

@@ -79,7 +79,7 @@ lib.contentElement {
 	}
 }
 
-tt_content.sudhaus7newspage_element < lib.contentElement
+tt_content.sudhaus7newspage_element =< lib.contentElement
 tt_content.sudhaus7newspage_element {
 	templateName = NewspageElement
 	dataProcessing {
