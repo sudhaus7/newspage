@@ -97,37 +97,7 @@ call_user_func(function () {
         'after'
     );
 
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
-        mod.wizards.newContentElement.wizardItems {
-            common {
-                elements {
-                    '.$pluginSignature.' {
-                        title = '.$languageFilePrefix.'tt_content.'.$pluginSignature.'
-                        description = '.$languageFilePrefix.'tt_content.'.$pluginSignature.'.description
-                        iconIdentifier = newspage-plugin
-                        tt_content_defValues {
-                            CType = '.$pluginSignature.'
-                        }
-                    }
-                }
-                show := addToList('.$pluginSignature.')
-            }
-        }
-    ');
-
-
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
-        TCEFORM.tt_content.imagewidth.types.sudhaus7newspage_element.disabled = 1
-        TCEFORM.tt_content.imageheight.types.sudhaus7newspage_element.disabled = 1
-        TCEFORM.tt_content.imageborder.types.sudhaus7newspage_element.disabled = 1
-        TCEFORM.tt_content.header_position.types.sudhaus7newspage_element.disabled = 1
-        TCEFORM.tt_content.header_layout.types.sudhaus7newspage_element.disabled = 1
-        TCEFORM.tt_content.header_link.types.sudhaus7newspage_element.disabled = 1
-        TCEFORM.tt_content.date.types.sudhaus7newspage_element.disabled = 1
-        TCEFORM.tt_content.subheader.types.sudhaus7newspage_element.disabled = 1
-    ');
-
-    $GLOBALS['TCA']['tt_content']['ctrl']['typeicon_classes'][$pluginSignature] = 'mimetypes-x-content-text';
+  $GLOBALS['TCA']['tt_content']['ctrl']['typeicon_classes'][$pluginSignature] = 'mimetypes-x-content-text';
     
     $TCA['tt_content']['palettes'][$extKey.'_datetime']['showitem'] = 'tx_sudhaus7newspage_from,tx_sudhaus7newspage_showdate';
     

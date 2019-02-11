@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2014-09-12T13:49:12Z">
+	<file source-language="en" datatype="plaintext" original="messages" date="2019-02-11T11:52:12Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -142,6 +142,9 @@
 				<source>Parent Tag</source>
 			</trans-unit>
 
+			<trans-unit id="pages.tsconfig.title">
+				<source>Sudhaus7 Newspage element definitions</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

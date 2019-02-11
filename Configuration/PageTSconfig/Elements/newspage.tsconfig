@@ -2,12 +2,56 @@ mod.wizards.newContentElement.wizardItems.common {
 	elements {
 		sudhaus7newspage_element {
 			iconIdentifier = default-icon
-			title = LLL:EXT:template/Resources/Private/Language/locallang.xlf:contentbeam.wizard.title
-			description = LLL:EXT:template/Resources/Private/Language/locallang.xlf:contentbeam.wizard.description
+			title = LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:tt_content.sudhaus7newspage_element
+			description = LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:tt_content.sudhaus7newspage_element.description
+			iconIdentifier = newspage-plugin
 			tt_content_defValues {
-				CType = contentbeam
+				CType = sudhaus7newspage_element
 			}
 		}
 	}
-	show := addToList(contentbeam)
+	show := addToList(sudhaus7newspage_element)
+}
+
+TCEFORM.tt_content {
+	imagewidth {
+		types {
+			sudhaus7newspage_element.disabled = 1
+		}
+	}
+	imageheight {
+		types {
+			sudhaus7newspage_element.disabled = 1
+		}
+	}
+	imageborder {
+		types {
+			sudhaus7newspage_element.disabled = 1
+		}
+	}
+	header_position {
+		types {
+			sudhaus7newspage_element.disabled = 1
+		}
+	}
+	header_layout {
+		types {
+			sudhaus7newspage_element.disabled = 1
+		}
+	}
+	header_link {
+		types {
+			sudhaus7newspage_element.disabled = 1
+		}
+	}
+	date {
+		types {
+			sudhaus7newspage_element.disabled = 1
+		}
+	}
+	subheader {
+		types {
+			sudhaus7newspage_element.disabled = 1
+		}
+	}
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-09-12T13:49:12Z">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2019-02-11T11:52:12Z">
         <header>
             <generator>LFEditor</generator>
         </header>
@@ -199,6 +199,10 @@
 				<target>Standard</target>
 			</trans-unit>
 
+			<trans-unit id="pages.tsconfig.title">
+				<source>Sudhaus7 Newspage element definitions</source>
+				<target>Sudhaus7 Newspage Definitionen für Element</target>
+			</trans-unit>
 
         </body>
     </file>

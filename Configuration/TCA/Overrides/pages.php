@@ -69,6 +69,13 @@ call_user_func(
                 ]
             ];
         }
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
+            $extKey,
+            'Configuration/PageTSconfig/page.tsconfig',
+            $languageFilePrefix.'pages.tsconfig.title'
+        );
+
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('@import \'EXT:sudhaus7_newspage/Configuration/PageTSconfig/page.tsconfig\'');
     },
     'sudhaus7_newspage',
     'pages'
