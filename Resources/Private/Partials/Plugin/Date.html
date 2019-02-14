@@ -2,13 +2,13 @@
 <f:if condition="{record.txSudhaus7newspageShowdate} == 1">
     <f:if condition="{record.txSudhaus7newspageTo} > 0">
         <f:then>
-            <bf:date format="d.m." respectlocale="1" date="{record.txSudhaus7newspageFrom}" length="short"/>
+            <f:format.date format="d.m." date="{record.txSudhaus7newspageFrom}" />
             bis
-            <bf:date format="LOCALEDATE" respectlocale="1" date="{record.txSudhaus7newspageTo}" length="short"/>,
+            <f:format.date format="%x" date="{record.txSudhaus7newspageTo}" />,
 
         </f:then>
         <f:else>
-            <bf:date format="LOCALEDATE" respectlocale="1" date="{record.txSudhaus7newspageFrom}" length="short"/>,
+            <f:format.date format="%x" date="{record.txSudhaus7newspageFrom}" />,
         </f:else>
     </f:if>
 </f:if>
