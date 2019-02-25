@@ -73,7 +73,7 @@ call_user_func(
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
             $extKey,
             'Configuration/PageTSconfig/page.tsconfig',
-            $languageFilePrefix.'pages.tsconfig.title'
+            '(Sudhaus7) Newspage Definitions'
         );
 
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('@import \'EXT:sudhaus7_newspage/Configuration/PageTSconfig/page.tsconfig\'');
