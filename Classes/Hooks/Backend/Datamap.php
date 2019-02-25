@@ -118,7 +118,7 @@ class Datamap
                     //Dies this page have newspage elements?
                     $query = $this->databaseConnection->createQueryBuilder();
                     $query->select(...['*'])->from('tt_content');
-                    $query->andWhere($query->expr()->eq('CType', 'sudhaus7newspage_element'));
+                    $query->andWhere($query->expr()->eq('CType', $query->createNamedParameter('sudhaus7newspage_element')));
                     $query->andWhere($query->expr()->eq('deleted', 0));
                     $query->andWhere($query->expr()->eq('pid', $id));
                     $query->orderBy('hidden', 'ASC');
@@ -152,7 +152,7 @@ class Datamap
                 if (isset($fieldArray['title'])) {
                     $query = $this->databaseConnection->createQueryBuilder();
                     $query->select(...['*'])->from('tt_content');
-                    $query->andWhere($query->expr()->eq('CType', 'sudhaus7newspage_element'));
+                    $query->andWhere($query->expr()->eq('CType', $query->createNamedParameter('sudhaus7newspage_element')));
                     $query->andWhere($query->expr()->eq('deleted', 0));
                     $query->andWhere($query->expr()->eq('pid', $pages_language_overlay['pid']));
     
