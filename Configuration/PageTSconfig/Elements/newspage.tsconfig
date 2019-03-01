@@ -1,7 +1,7 @@
 mod.wizards.newContentElement.wizardItems.common {
 	elements {
 		sudhaus7newspage_element {
-			iconIdentifier = EXT:sudhaus7_newspage/Resources/Public/Icons/newspage.gif
+			iconIdentifier = sudhaus7nespage-plugin
 			title = LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:tt_content.sudhaus7newspage_element
 			description = LLL:EXT:sudhaus7_newspage/Resources/Private/Language/locallang.xlf:tt_content.sudhaus7newspage_element.description
 			iconIdentifier = newspage-plugin
